@@ -1,0 +1,25 @@
+execute ibeblock
+as
+begin
+  cbb = 'execute ibeblock (LogMessage variant)
+         as
+         begin
+           ibec_progress(LogMessage);
+         end';
+
+  TargetDB = ibec_CreateConnection(__ctInterBase, 
+                                   'DBName="localhost:tp_svn";
+                                   ClientLib=gds32.dll;
+                                   User=SYSDBA; Password=masterkey; Names=WIN1251; SqlDialect=3');
+  try
+    ibec_CompareMetadata('X:\sql\tp_current_metadata.sql', TargetDB,
+                         'X:\sql\tp_update_local_from_current_metadata.sql', -- Don't forget to specify file name for the result script
+                         'ServerVersion=FB25;
+                          SafeDatatypeConversion;
+                          IgnoreColumnPositions;
+                          IgnoreIBEObjects', 
+                         cbb);
+  finally
+    ibec_CloseConnection(TargetDB);
+  end;
+end;

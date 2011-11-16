@@ -1,0 +1,29 @@
+execute ibeblock
+as
+begin
+  cbb = 'execute ibeblock (
+           LogLine variant)
+         as
+         begin
+           ibec_progress(LogLine);
+         end';
+
+  DB = ibec_CreateConnection(__ctInterBase, 
+                             'DBName="localhost:tp_svn";
+                              ClientLib=gds32.dll;
+                              User=SYSDBA; Password=masterkey; Names=WIN1251; SqlDialect=3');
+  try
+    ibec_ExtractMetadata(DB, 'X:\sql\tp_current_metadata.sql',
+                             'IncludePassword;
+                              ExtractDescriptions;
+                              ExcludeIBE;
+                              ExcludeTMP;
+                              UseCreateOrAlter;
+                              ExtractPrivileges;
+                              DateFormat=YYYY-MM-DD;
+                              DataTables=NONE', 
+                              cbb);
+  finally
+    ibec_CloseConnection(DB);
+  end;
+end;
