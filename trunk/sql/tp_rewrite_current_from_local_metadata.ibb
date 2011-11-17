@@ -8,10 +8,18 @@ begin
            ibec_progress(LogLine);
          end';
 
-  DB = ibec_CreateConnection(__ctInterBase, 
-                             'DBName="localhost:tp_svn";
-                              ClientLib=gds32.dll;
-                              User=SYSDBA; Password=masterkey; Names=WIN1251; SqlDialect=3');
+  IniFile = ibec_ini_Open('X:\private.ini');
+  IniDBName =       ibec_ini_ReadString(IniFile, 'Database', 'DBName', 'localhost:tp_svn');
+  IniClientLib =    ibec_ini_ReadString(IniFile, 'Database', 'ClientLib', 'gds32.dll');
+  IniUser =         ibec_ini_ReadString(IniFile, 'Database', 'User', 'SYSDBA');
+  IniPassword =     ibec_ini_ReadString(IniFile, 'Database', 'Password', 'masterkey');
+  ibec_ini_Close(IniFile);
+
+  DB = ibec_CreateConnection(__ctInterBase,
+                             'DBName="'+IniDBName+'";
+                              ClientLib='+IniClientLib+';
+                              User='+IniUser+'; Password='+IniPassword+'; Names=WIN1251; SqlDialect=3');
+
   try
     ibec_ExtractMetadata(DB, 'X:\sql\tp_current_metadata.sql',
                              'IncludePassword;
@@ -27,3 +35,5 @@ begin
     ibec_CloseConnection(DB);
   end;
 end;
+
+
