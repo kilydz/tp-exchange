@@ -1,5 +1,5 @@
 [Database]
-DBName		= localhost:tp_svn
-ClientLib 	= gds32.dll
-User 		= SYSDBA
-Password	= masterkey
+DBName=localhost:tp_svn
+ClientLib=gds32.dll
+User=SYSDBA
+Password=masterkey
