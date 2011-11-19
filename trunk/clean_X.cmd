@@ -1,1 +1,1 @@
-subst x: /D
+subst s: /D
