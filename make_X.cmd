@@ -1,1 +1,1 @@
-subst x: .
+subst s: .

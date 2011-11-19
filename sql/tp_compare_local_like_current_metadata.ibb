@@ -7,7 +7,7 @@ begin
            ibec_progress(LogMessage);
          end';
 
-  IniFile = ibec_ini_Open('X:\private.ini');
+  IniFile = ibec_ini_Open('S:\private.ini');
   IniDBName =       ibec_ini_ReadString(IniFile, 'Database', 'DBName', 'localhost:tp_svn');
   IniClientLib =    ibec_ini_ReadString(IniFile, 'Database', 'ClientLib', 'gds32.dll');
   IniUser =         ibec_ini_ReadString(IniFile, 'Database', 'User', 'SYSDBA');
@@ -20,8 +20,8 @@ begin
                               User='+IniUser+'; Password='+IniPassword+'; Names=WIN1251; SqlDialect=3');
 
   try
-    ibec_CompareMetadata('X:\sql\tp_current_metadata.sql', TargetDB,
-                         'X:\sql\tp_update_local_from_current_metadata.sql', -- Don't forget to specify file name for the result script
+    ibec_CompareMetadata('S:\sql\tp_current_metadata.sql', TargetDB,
+                         'S:\sql\tp_update_local_from_current_metadata.sql', -- Don't forget to specify file name for the result script
                          'ServerVersion=FB25;
                           SafeDatatypeConversion;
                           IgnoreColumnPositions;

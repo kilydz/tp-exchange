@@ -8,7 +8,7 @@ begin
            ibec_progress(LogLine);
          end';
 
-  IniFile = ibec_ini_Open('X:\private.ini');
+  IniFile = ibec_ini_Open('S:\private.ini');
   IniDBName =       ibec_ini_ReadString(IniFile, 'Database', 'DBName', 'localhost:tp_svn');
   IniClientLib =    ibec_ini_ReadString(IniFile, 'Database', 'ClientLib', 'gds32.dll');
   IniUser =         ibec_ini_ReadString(IniFile, 'Database', 'User', 'SYSDBA');
@@ -21,7 +21,7 @@ begin
                               User='+IniUser+'; Password='+IniPassword+'; Names=WIN1251; SqlDialect=3');
 
   try
-    ibec_ExtractMetadata(DB, 'X:\sql\tp_current_metadata.sql',
+    ibec_ExtractMetadata(DB, 'S:\sql\tp_current_metadata.sql',
                              'IncludePassword;
                               ExtractDescriptions;
                               ExcludeIBE;
