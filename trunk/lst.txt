@@ -1,0 +1,38 @@
+
+X:\tp\tp-exchange\trunk>.\bin\IBEScript.exe .\sql\tp_compare_local_like_current_metadata.ibb 
+IBEScript Version 2011.09.05 Copyright (c) 2002-2011 IBExpert KG (www.ibexpert.com)
+
+
+Executing script: .\sql\tp_compare_local_like_current_metadata.ibb
+(Line: 33) : Executing IBEBlock...
+
+
+Error in script: .\sql\tp_compare_local_like_current_metadata.ibb
+Error occurred while executing following statement (line 33):
+--------  STATEMENT ----------
+ ibec_CreateConnection(__ctInterBase,
+                             'DBName="'+ ? +'";
+                              ClientLib='+ ? +';
+                              User='+ ? +'; Password='+ ? +'; Names=WIN1251; SqlDialect=3')
+
+--------  ERROR ----------
+Unsuccessful execution caused by a system error that precludes
+successful execution of subsequent statements.
+I/O error for file "tp_svn".
+Error while trying to open file.
+Не удается найти указанный файл.
+.
+
+
+
+Script executed with errors.
+Total execution time: 46ms
+
+X:\tp\tp-exchange\trunk>.\bin\IBEScript.exe .\sql\tp_update_local_from_current_metadata.sql 
+IBEScript Version 2011.09.05 Copyright (c) 2002-2011 IBExpert KG (www.ibexpert.com)
+
+
+Cannot open script file: .\sql\tp_update_local_from_current_metadata.sql
+
+X:\tp\tp-exchange\trunk>pause
+Для продолжения нажмите любую клавишу . . . 
