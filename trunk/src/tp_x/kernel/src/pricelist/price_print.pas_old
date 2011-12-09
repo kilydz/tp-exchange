@@ -1,0 +1,160 @@
+unit price_print;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, dxExEdtr, dxEdLib, dxCntner, dxEditor, DB,
+  IBCustomDataSet, IBQuery, IBDatabase, FR_DSet, FR_DBSet,
+  FR_Class, Buttons, FR_E_CSV, FR_E_TXT, FR_E_HTM, FR_Shape, FR_E_RTF,
+  Grids, DBGrids;
+
+type
+  TfPriceDialog = class(TForm)
+    Button1: TButton;
+    Button2: TButton;
+    Panel1: TPanel;
+    Base: TIBDatabase;
+    tr: TIBTransaction;
+    q: TIBQuery;
+    frReport1: TfrReport;
+    frDBDataSet1: TfrDBDataSet;
+    SaveDialog1: TSaveDialog;
+    dsQ: TDataSource;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    qShapka: TIBQuery;
+    dsQShapka: TDataSource;
+    qRNOMEN_CODE: TIBStringField;
+    qRNOMEN_NAME: TIBStringField;
+    qROUT_PRICE: TFloatField;
+    qRREST: TFloatField;
+    Button3: TButton;
+    qRGRP_NAME: TIBStringField;
+    Label1: TLabel;
+    ed_tree: TdxPopupEdit;
+    scStyle: TdxEditStyleController;
+    procedure RadioButton1Click(Sender: TObject);
+    procedure RadioButton2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  //  prm: TParamPrice;
+    order: string;
+    queries: array[0..3] of PChar;
+    procedure RefreshPrice(pexport: integer);
+  end;
+
+//function PriceList(var prm: TParamPrice): integer;
+
+implementation
+
+{$R *.dfm}
+{
+function PricePrint(var prm: TParamPrice): integer;
+var dlg: TfPriceDialog;
+begin
+  Application.Handle := prm.sGen.AppHandle;
+  dlg := TfPriceDialog.Create(Application);
+  dlg.Base.SetHandle(prm.sGen.pDBHandle^);
+
+  dlg.prm := prm;
+  dlg.ShowModal;
+  dlg.Free;
+  Result := 1;
+end;
+}
+procedure TfPriceDialog.RefreshPrice(pexport: integer);
+var date_time: string;
+begin
+{  if tr.InTransaction then tr.Commit;
+  if RadioButton1.Checked then
+    q.SQL.Text := queries[1] + prm.grp_list + order
+  else
+  begin
+    q.SQL.Text := queries[0] + prm.grp_list + order;
+    date_time := DateToStr(dxDateEdit1.Date) + ' ';
+    date_time := date_time + TimeToStr(dxTimeEdit1.Time);
+    q.ParamByName('date_time').AsString := date_time;
+  end;
+  q.ParamByName('sklad_id').AsInteger := prm.sGen.sSkladID;
+  if CheckBox1.Checked then
+    q.ParamByName('with_0').AsInteger := 1
+  else
+    q.ParamByName('with_0').AsInteger := 0;
+  qShapka.ParamByName('client_id').AsInteger := 1;
+  tr.StartTransaction;
+  qShapka.Open;
+  q.Open;
+  tr.CommitRetaining;
+
+  if pexport = 0 then
+  begin
+    if CheckBox2.Checked then
+      frReport1.LoadFromFile(prm.sGen.wReportsWay + '\PriceListRests.frf')
+    else
+      frReport1.LoadFromFile(prm.sGen.wReportsWay + '\PriceList.frf');
+  end
+  else
+  begin if pexport = 1 then
+      frReport1.LoadFromFile(prm.sGen.wReportsWay + '\PriceListExport.frf');
+  end;
+  frReport1.PrepareReport;  }
+end;
+
+procedure TfPriceDialog.RadioButton1Click(Sender: TObject);
+begin
+{  RadioButton2.Checked := false;
+  dxDateEdit1.Enabled := false;
+  dxTimeEdit1.Enabled := false; }
+end;
+
+procedure TfPriceDialog.RadioButton2Click(Sender: TObject);
+begin
+{  RadioButton1.Checked := false;
+  dxDateEdit1.Enabled := true;
+  dxTimeEdit1.Enabled := true; }
+end;
+
+procedure TfPriceDialog.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+//var shw: TfPriceShow;
+begin
+{  if ModalResult = mrCancel then
+  begin
+    Action := caFree;
+  end;
+  if ModalResult = mrOk then
+  begin
+    order := ') order by rgrp_name, rnomen_name ';
+    RefreshPrice(0);
+    frReport1.ShowReport;
+    Action := caNone;
+  end;
+  if ModalResult = mrYes then
+  begin
+    order := ') order by rnomen_name ';
+    if tr.InTransaction then tr.Commit;
+    tr.StartTransaction;
+    q.Open;
+    shw := TfPriceShow.Create(Application);
+    shw.dxDBGrid1.DataSource := dsQ;
+    RefreshPrice(1);
+    shw.ShowModal;
+    Action := caNone;
+  end; }
+end;
+
+procedure TfPriceDialog.FormCreate(Sender: TObject);
+begin
+{  dxDateEdit1.Date := Date;
+  dxTimeEdit1.Time := Now;
+
+  queries[0] := 'select rgrp_name, rnomen_code, rnomen_name, rout_price, rrest from rp_price_ingrp(0, :date_time, :with_0, :sklad_id) where rgrp_id in (';
+  queries[1] := 'select rgrp_name, rnomen_code, rnomen_name, rout_price, rrest from rp_price_ingrp(0, null, :with_0, :sklad_id) where rgrp_id in (';    }
+end;
+
+end.
