@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="WINDOWS-1251" standalone="yes"?>
+<kernelAppInfo>
+	<startWork>
+		<appName>ПК "Котиніум Трейд" (Торгова площадка)</appName>
+		<dllName>start.dll</dllName>
+		<functionName>GetStartResult</functionName>
+		<appIconName>kernel.ico</appIconName>
+	</startWork>
+	<listOfPages>
+		<page> 
+			<name>Товари</name>
+			<dllName>nomens.dll</dllName>
+		</page>
+		<page> 
+			<name>Документи</name>
+			<dllName>documents.dll</dllName>
+		</page>
+	</listOfPages>
+	<listOfMenus>
+		<menuItem>
+			<name>Магазин</name>
+			<menuItem>
+				<name>Вибрати</name>
+				<dllName>Objects.dll</dllName>
+				<funcName>DialogObjects</funcName>
+			</menuItem>
+		</menuItem>
+		<menuItem>
+			<name>Синхронізація</name>
+			<menuItem>
+				<name>...з вагою</name>
+				<dllName>scales.dll</dllName>
+				<funcName>ScalesListDialog</funcName>
+			</menuItem>
+		</menuItem>
+	</listOfMenus>
+</kernelAppInfo>

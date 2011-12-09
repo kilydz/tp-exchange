@@ -1,0 +1,61 @@
+object fmessage: Tfmessage
+  Left = 0
+  Top = 0
+  BorderStyle = bsToolWindow
+  Caption = #1059#1074#1072#1075#1072'!!!'
+  ClientHeight = 202
+  ClientWidth = 457
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object p_left: TPanel
+    Left = 0
+    Top = 0
+    Width = 328
+    Height = 202
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 1
+    TabStop = True
+    object ed_message: TMemo
+      AlignWithMargins = True
+      Left = 3
+      Top = 3
+      Width = 322
+      Height = 196
+      Align = alClient
+      Alignment = taCenter
+      BevelOuter = bvNone
+      BorderStyle = bsNone
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      Lines.Strings = (
+        'ed_message')
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object p_buttons: TPanel
+    Left = 328
+    Top = 0
+    Width = 129
+    Height = 202
+    Align = alRight
+    BevelOuter = bvNone
+    TabOrder = 0
+    TabStop = True
+  end
+end

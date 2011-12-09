@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{2d68cd1d-ff49-4b48-92cf-8c073750dacd}</ProjectGuid>
+    <MainSource>objects.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_EnabledPackages>true</DCC_EnabledPackages>
+    <DCC_UsePackage>dxGrEdD6;ibxpress</DCC_UsePackage>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>X:\bin\veles\objects.dll</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_ExeOutput>X:\bin\veles</DCC_ExeOutput>
+    <DCC_DcuOutput>x:\src\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>x:\src\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>x:\src\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>X:\include;X:\lib\etalons</DCC_UnitSearchPath>
+    <DCC_ResourcePath>X:\include;X:\lib\etalons</DCC_ResourcePath>
+    <DCC_ObjPath>X:\include;X:\lib\etalons</DCC_ObjPath>
+    <DCC_IncludePath>X:\include;X:\lib\etalons</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_ExeOutput>X:\bin\veles</DCC_ExeOutput>
+    <DCC_DcuOutput>x:\src\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>x:\src\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>x:\src\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>X:\include;X:\lib\etalons</DCC_UnitSearchPath>
+    <DCC_ResourcePath>X:\include;X:\lib\etalons</DCC_ResourcePath>
+    <DCC_ObjPath>X:\include;X:\lib\etalons</DCC_ObjPath>
+    <DCC_IncludePath>X:\include;X:\lib\etalons</DCC_IncludePath>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="HostApplication">x:\bin\veles\veles_login_prompt.exe</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">2</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">48</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1058</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName">SoftWestGroup</VersionInfoKeys><VersionInfoKeys Name="FileDescription">Склади</VersionInfoKeys><VersionInfoKeys Name="FileVersion">2.0.0.48</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName">ПК Капітал Гурт</VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments">by Spirit</VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxEdtrD6.bpl">Express inplace editors</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxBarD6.bpl">ExpressBars by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxBarDBNavD6.bpl">ExpressBars DBNavigator by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxBarExtDBItemsD6.bpl">ExpressBars extended DB items by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxBarExtItemsD6.bpl">ExpressBars extended items by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxdbtrd6.bpl">ExpressDBTree by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxExELD6.bpl">ExpressEditors Library (Extended) by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxExRwD6.bpl">ExpressInspector Extended Rows</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxGrEdD6.bpl">Express extended inplace editors</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxMasterViewD6.bpl">ExpressMasterView by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxmdsd6.bpl">ExpressMemData by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxObjInsD6.bpl">ExpressRTTIInspector by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxPSCored6.bpl">ExpressPrinting System (core 2.2) by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Documents and Settings\Admin\Мои документы\Borland Studio Projects\Bpl\dcldxtrmdd6.bpl">ExpressTreePrintedDataSet by Developer Express Inc.</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">objects.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="objects.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="uDM.pas">
+      <Form>DataModule1</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="uObjects.pas">
+      <Form>Form1</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>
