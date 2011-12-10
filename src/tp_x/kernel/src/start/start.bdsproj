@@ -119,19 +119,19 @@
 			<Linker Name="ExeDescription"></Linker>
 		</Linker>
 		<Directories>
-			<Directories Name="OutputDir">X:\store\bin\veles</Directories>
+			<Directories Name="OutputDir">X:\kernel\bin\veles</Directories>
 			<Directories Name="UnitOutputDir"></Directories>
 			<Directories Name="PackageDLLOutputDir"></Directories>
 			<Directories Name="PackageDCPOutputDir"></Directories>
-			<Directories Name="SearchPath">X:\veles\include</Directories>
+			<Directories Name="SearchPath">X:\kernel\include</Directories>
 			<Directories Name="Packages">dxGrEdD6;ibxpress</Directories>
 			<Directories Name="Conditionals"></Directories>
 			<Directories Name="DebugSourceDirs"></Directories>
 			<Directories Name="UsePackages">True</Directories>
 		</Directories>
 		<Parameters>
-			<Parameters Name="RunParams">store.xml</Parameters>
-			<Parameters Name="HostApplication">X:\store\bin\veles\veles.exe</Parameters>
+			<Parameters Name="RunParams">kernel.xml</Parameters>
+			<Parameters Name="HostApplication">X:\kernel\bin\veles\kernel.exe</Parameters>
 			<Parameters Name="Launcher"></Parameters>
 			<Parameters Name="UseLauncher">False</Parameters>
 			<Parameters Name="DebugCWD"></Parameters>
