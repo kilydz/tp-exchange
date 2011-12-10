@@ -1,20 +1,13 @@
 library start;
-//  Name: start.dpr
-//  Copyright: SoftWest group.
-//  Author: Maxim Mihaluk
-//  Date: 06.01.06
-//  Description: ядро програми Велес (стандартна стартова дллка);
-//               (нова версія - з динамічно формованими меню для плагінів та
-//                трейем).
 
 uses
   FastShareMem,
   SysUtils,
   Classes,
-  veles_h,
+  kernel_h,
   utils_h,
-  ib_h,
   crypt_h,
+  secure_h,
   functional in 'functional.pas';
 
 {$R *.res}
