@@ -157,7 +157,7 @@ type
     ZCustom_data = record
         DateLife:     TDateTime;        //Для не сумісності
         DateOfDeath : TDateTime;        //Дата завершення ліцензії
-//        code_dealer: Integer;
+        code_dealer: Integer;
     end;
 
     //структура, що містить інформацію про програму, яка передається модулям
@@ -226,8 +226,8 @@ type
     // Стандартна процедура створення/редагування запису
     ZRecordDialogFunc = function (var id: ZFuncArgs; var prm: ZVelesInfoRec): Integer;
 
-var
-  code_dealer: Integer;
+//var
+//  code_dealer: Integer;
 
 //*******************************procedures*************************************
 

@@ -4,6 +4,8 @@ uses
   FastShareMem,
   SysUtils,
   Classes,
+  Windows,
+  Dialogs,
   kernel_h,
   utils_h,
   crypt_h,
@@ -11,6 +13,27 @@ uses
   functional in 'functional.pas';
 
 {$R *.res}
+
+procedure InitObject(var a_veles_info: ZVelesInfoRec);
+var
+  libHandle: THandle;
+  ObjectSetLast: function (var prm: ZVelesInfoRec): boolean;
+begin
+  a_veles_info.custom_data.code_dealer := -1;
+
+  libHandle := LoadLibrary('objects.dll');
+  if libHandle >= 32 then
+  begin
+    @ObjectSetLast := nil;
+    @ObjectSetLast := GetProcAddress(libHandle, 'ObjectSetLast');
+    if (@ObjectSetLast = nil) or
+       (not ObjectSetLast(a_veles_info)) then
+        //ErrorDialog('Жопа', 'дінозавра');
+        HandleError('Не визначено активний магазин');
+    FreeLibrary(libHandle);
+  end;
+end;
+
 
 //Перетворює рядок з датою формату DATE_FORMAT у рядок формату NEW_DATE_FORMAT
 //Функціональними є комбінації символів виду
@@ -118,9 +141,11 @@ end;//function GetDateOfDeath(var a_veles_info: ZVelesInfoRec): TDateTime;
 function GetStartResult(var a_veles_info: ZVelesInfoRec): Integer; stdcall;
 begin
     try
-        a_veles_info.user_id:=GetUserID(a_veles_info.db_handle, a_veles_info.user_name);
+      InitObject(a_veles_info);
+//        a_veles_info.user_id:=GetUserID(a_veles_info.db_handle, a_veles_info.user_name);
         if HasUserAccessEx(a_veles_info, ACCESS_TO_PROGRAM) then
         begin
+            //a_veles_info.custom_data.code_dealer :=
             a_veles_info.custom_data.DateOfDeath := GetDateOfDeath(a_veles_info);
             if a_veles_info.custom_data.DateOfDeath = 0 then
               Result:=RESULT_CANCEL
@@ -129,6 +154,7 @@ begin
               Result:=RESULT_OK;
               RunTD10Correct(a_veles_info);
             end;
+
         end
         else begin
             Result:=RESULT_CANCEL;

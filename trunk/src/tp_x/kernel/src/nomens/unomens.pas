@@ -173,7 +173,7 @@ begin
     'w.EXCISE,               --•    Акциз – відмітка чи є товар акцизним;' + #13#10 +
     'w.is_sell,              --•    Дозволено на продаж – відмітка про блокування товару на продаж;' + #13#10 +
     'w.is_purchase,          --•    Дозволена на закупка – відмітка про блокування закупки;' + #13#10 +
-   'cast( (select count(au.bar_code)' + #13#10 +
+    'cast( (select count(au.bar_code)' + #13#10 +
         'from addition_unit au' + #13#10 +
         'where au.code_wares = w.code_wares' + #13#10 +
             'and au.CHECK_FIND_BAR_CODE = ''Y''' + #13#10 +
@@ -239,7 +239,7 @@ begin
 //  q_dic.ParamByName('iflag').AsInteger := StrToInt(ed_flag.Text);
   if q_dic.Params.FindParam('icode_group_wares') <> nil then
     q_dic.ParamByName('icode_group_wares').AsInteger := grp_id;
-  q_dic.ParamByName('icode_dealer').AsInteger := code_dealer;
+  q_dic.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;
   inherited RefreshDic;
 end;
 
@@ -417,12 +417,18 @@ begin
       @lpPricesBySQL := GetProcAddress(lib_handle, 'PricesBySQL');
       if @lpPricesBySQL <> nil then
       begin
-        price_sql := 'select n.nomen_id as onomen_id, n.nomen_code as onomen_code, ' +
-  ' n.nomen_name as onomen_name, n.out_price as ooutprice, n.is_in_discount as ois_in_discount, 1 as oprint_it from t_nomens n ';
+//        price_sql := 'select n.nomen_id as onomen_id, n.nomen_code as onomen_code, ' +
+//          ' n.nomen_name as onomen_name, n.out_price as ooutprice, '+
+//          ' n.is_in_discount as ois_in_discount, 1 as oprint_it from t_nomens n ';
+        price_sql := 'select w.code_wares as onomen_id, w.code_wares as onomen_code, ' +
+          ' w.NAME_WARES_RECEIPT as onomen_name, pd.price_dealer as ooutprice, '+
+          ' 0 ois_in_discount, 1 as oprint_it from wares w '+
+          ' left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer = '+IntToStr(prm.custom_data.code_dealer)+')';
         if id_list.GenerateSpaceList = '  ' then
-          lpPricesBySQL(price_sql + ' where nomen_id='+q_dic.FieldByName('onomen_id').AsString, prm)
+          lpPricesBySQL(price_sql + ' where w.code_wares = '+q_dic.FieldByName('code_wares').AsString, prm)
         else
-          lpPricesBySQL(price_sql + ' where isinliststr('''+' '+id_list.GenerateSpaceList+' '+''', n.nomen_id) = 1 ', prm);
+          lpPricesBySQL(price_sql + ' where w.code_wares in ( '+id_list.GenerateList+' )', prm);
+//          lpPricesBySQL(price_sql + ' where isinliststr('''+' '+id_list.GenerateSpaceList+' '+''', n.nomen_id) = 1 ', prm);
       end;
       FreeLibrary(lib_handle);
     end;
