@@ -2,7 +2,7 @@ unit functional;
 
 interface
 
-uses IBHeader, SysUtils, veles_h, IBSQL, IBDatabase, DB, Forms, utils_h;
+uses IBHeader, SysUtils, kernel_h, IBSQL, IBDatabase, DB, Forms, utils_h;
 
 procedure RunTD10Correct(var adm_veles_info: ZVelesInfoRec);
 

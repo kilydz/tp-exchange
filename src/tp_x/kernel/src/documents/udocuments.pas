@@ -233,6 +233,7 @@ var item: TMenuItem;
   i: integer;
   r: real;
   mes: PAnsiChar;
+  price_sql, docs_ids: string;
 begin
   item := TMenuItem(Sender);
 
@@ -469,8 +470,27 @@ begin
     begin
       @lpPricesBySQL := GetProcAddress(lib_handle, 'PricesBySQL');
       if @lpPricesBySQL <> nil then
-        lpPricesBySQL(Format('select * from PS_PRINT_PRICES_BY_DOCUMENT(%d)',
-                         [q_dic.FieldByName('odocument_id').AsInteger]), prm);
+      begin
+        if id_list.GenerateSpaceList = '  ' then
+          docs_ids := q_dic.FieldByName('doc_id').AsString
+        else
+          docs_ids := id_list.GenerateList;
+
+        price_sql :=
+        'with dr_wares as' + #13#10 +
+        '(' + #13#10 +
+            'select distinct dr.code_wares' + #13#10 +
+            'from t_doc_recs dr where dr.doc_id in ('+docs_ids+')' + #13#10 +
+        ')' + #13#10 +
+        'select w.code_wares as onomen_id, w.code_wares as onomen_code,' + #13#10 +
+               'w.NAME_WARES_RECEIPT as onomen_name, pd.price_dealer as ooutprice,' + #13#10 +
+               '0 ois_in_discount, 1 as oprint_it' + #13#10 +
+        'from wares w' + #13#10 +
+            'inner join dr_wares on (w.code_wares = dr_wares.code_wares)' + #13#10 +
+            'left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer ='+
+            IntToStr(prm.custom_data.code_dealer)+')';
+        lpPricesBySQL(price_sql, prm);
+      end;
       FreeLibrary(lib_handle);
     end
   end

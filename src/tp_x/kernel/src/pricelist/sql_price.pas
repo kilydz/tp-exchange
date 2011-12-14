@@ -44,22 +44,9 @@ type
     g_diccnt: TdxDBGridMaskColumn;
     g_dicoutprice: TdxDBGridMaskColumn;
     mem_print: TRxMemoryData;
-    mem_printid: TIntegerField;
-    mem_printnomen_id: TIntegerField;
-    mem_printnomen_name: TStringField;
-    mem_printnomen_code: TStringField;
-    mem_printintp0: TIntegerField;
-    mem_printdecp0: TStringField;
-    mem_printintp: TIntegerField;
-    mem_printdecp: TStringField;
-    mem_printsi_name: TStringField;
     mem_dicoutprice: TFloatField;
-    mem_printoutprice: TFloatField;
-    mem_printbarcode: TStringField;
-    mem_printdatex_name: TStringField;
     mem_dicis_in_discount: TIntegerField;
     mem_dicprint_it: TIntegerField;
-    mem_printis_in_discount: TSmallintField;
     base_frf: TfrDBDataSet;
     report_frf: TfrReport;
     frBarCodeObject1: TfrBarCodeObject;
@@ -68,7 +55,12 @@ type
     mi_select_all: TMenuItem;
     mi_deselect_all: TMenuItem;
     frDesigner1: TfrDesigner;
-    mem_printmaker_point: TStringField;
+    mem_printCODE_WARES: TIntegerField;
+    mem_printNAME_WARES: TStringField;
+    mem_printNAME_WARES_RECEIPT: TStringField;
+    mem_printPRICE_DEALER: TFloatField;
+    mem_printDEFAULT_BARCODE: TStringField;
+    mem_printID: TIntegerField;
     procedure mi_popupPopup(Sender: TObject);
     procedure mi_itemsClick(Sender: TObject);
     procedure report_frfUserFunction(const Name: string; p1, p2, p3: Variant;
@@ -129,7 +121,20 @@ begin
   frf_list := TStringList.Create;
   ed_price_type.Descriptions.Clear;
   ed_price_type.Values.Clear;
-  ed_price_type.Descriptions.Add('Маленькі цінники');
+
+  ed_price_type.Descriptions.Add('Наклейка Zebra 58x40');
+  ed_price_type.Values.Add('0');
+  frf_list.Add('Zebra58x40.frf');
+
+  ed_price_type.Descriptions.Add('Наклейка Zebra 39x24');
+  ed_price_type.Values.Add('1');
+  frf_list.Add('Zebra39x24.frf');
+
+  ed_price_type.Descriptions.Add('Наклейка Zebra 28x28');
+  ed_price_type.Values.Add('2');
+  frf_list.Add('Zebra28x28.frf');
+
+  {ed_price_type.Descriptions.Add('Маленькі цінники');
   ed_price_type.Values.Add('0');
   frf_list.Add('small.frf');
   ed_price_type.Descriptions.Add('Цінник А5');
@@ -155,7 +160,7 @@ begin
   frf_list.Add('comic_A5.frf');
   ed_price_type.Descriptions.Add('Комічний стиль А4 (без знижки)');
   ed_price_type.Values.Add('8');
-  frf_list.Add('comic_A4.frf');
+  frf_list.Add('comic_A4.frf');}
   RefreshDic;
 
   //Налаштування
@@ -272,15 +277,35 @@ begin
      if (mem_dicprint_it.AsInteger > 0) and (mem_diccnt.AsInteger > 0) then
      begin
        q_R.Close;
-       q_R.SQL.Text := 'select * from PS_PRINT_PRICES_V1(:inomen_id)';
-       q_R.ParamByName('inomen_id').AsInteger := mem_dicnomen_id.AsInteger;
+       q_R.SQL.Text := 'select' + #13#10 +
+          'w.CODE_WARES,           --•    Код товару;' + #13#10 +
+          'w.NAME_WARES,           --•    Назва товару;' + #13#10 +
+          'w.NAME_WARES_RECEIPT,   --•    Коротка назва товару – для ЕККА;' + #13#10 +
+          'pd.price_dealer as PRICE_DEALER, --•    Ціна реалізації – ціна реалізації для поточного  магазину' + #13#10 +
+          '(select first (1) au.bar_code' + #13#10 +
+              'from addition_unit au' + #13#10 +
+              'where au.code_wares = w.code_wares' + #13#10 +
+                  'and au.CHECK_FIND_BAR_CODE = ''Y''' + #13#10 +
+                  'and au.default_unit = ''Y''' + #13#10 +
+                  'and au.bar_code is not null)' + #13#10 +
+          'as DEFAULT_BARCODE' + #13#10 +
+          'from WARES w' + #13#10 +
+          'left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer = :icode_dealer)' + #13#10 +
+          'where w.code_wares = :icode_wares';
+       q_R.ParamByName('icode_wares').AsInteger := mem_dicnomen_id.AsInteger;
+       q_R.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;
        q_R.ExecQuery;
        cnt := mem_diccnt.AsInteger;
        while cnt > 0 do
        begin
          mem_print.Append;
          mem_printid.AsInteger := num;
-         mem_printnomen_id.AsInteger := q_R.FieldByName('onomen_id').AsInteger;
+         mem_printCODE_WARES.AsInteger := q_R.FieldByName('code_wares').AsInteger;
+         mem_printNAME_WARES.AsString := q_R.FieldByName('NAME_WARES').AsString;
+         mem_printNAME_WARES_RECEIPT.AsString := q_R.FieldByName('NAME_WARES_RECEIPT').AsString;
+         mem_printPRICE_DEALER.AsFloat := q_R.FieldByName('price_dealer').AsFloat;
+         mem_printDEFAULT_BARCODE.AsString := q_R.FieldByName('DEFAULT_BARCODE').AsString;
+{         mem_printnomen_id.AsInteger := q_R.FieldByName('onomen_id').AsInteger;
          mem_printnomen_code.AsString := q_R.FieldByName('onomen_code').AsString;
          mem_printnomen_name.AsString := q_R.FieldByName('onomen_name').AsString;
          mem_printintp0.AsInteger := q_R.FieldByName('ointp0').AsInteger;
@@ -292,7 +317,7 @@ begin
          mem_printoutprice.AsFloat := q_R.FieldByName('ooutprice').AsFloat;
          mem_printdatex_name.AsString := q_R.FieldByName('odatex_name').AsString;
          mem_printmaker_point.AsString := q_R.FieldByName('omaker_point').AsString;
-         mem_printis_in_discount.AsInteger := mem_dicis_in_discount.AsInteger;
+         mem_printis_in_discount.AsInteger := mem_dicis_in_discount.AsInteger;}
          mem_print.Post;
          cnt := cnt - 1;
          num := num + 1;

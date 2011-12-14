@@ -11,6 +11,7 @@
 	<Default.Personality>  
     
     <Projects>
+      <Projects Name="pricelist.dll">pricelist\pricelist.bdsproj</Projects>
       <Projects Name="objects.dll">objects\objects.bdsproj</Projects>
       <Projects Name="kernel.exe">kernel\kernel.bdsproj</Projects>
       <Projects Name="zutils.dll">xutils\zutils.bdsproj</Projects>
@@ -21,12 +22,10 @@
       <Projects Name="popup.dll">popup\popup.bdsproj</Projects>
       <Projects Name="popups.dll">popups\popups.bdsproj</Projects>
       <Projects Name="libra_sync.dll">libra\libra_sync.bdsproj</Projects>
-      <Projects Name="massa_k_vpm.exe">massa_k_vpm\massa_k_vpm.bdsproj</Projects>
       <Projects Name="libra.dll">libra\libra.bdsproj</Projects>
       <Projects Name="scales.dll">scales\scales.bdsproj</Projects>
       <Projects Name="nomen.dll">nomen\nomen.bdsproj</Projects>
       <Projects Name="users.dll">users\users.bdsproj</Projects>
-      <Projects Name="pricelist.dll">pricelist\pricelist.bdsproj</Projects>
       <Projects Name="xreports.dll">xreports\xreports.bdsproj</Projects>
       <Projects Name="services.dll">services\services.bdsproj</Projects>
       <Projects Name="invoice.dll">invoice\invoice.bdsproj</Projects>
@@ -36,7 +35,8 @@
       <Projects Name="about.dll">about\about.bdsproj</Projects>
       <Projects Name="veles_conf.exe">veles_config\veles_conf.bdsproj</Projects>
       <Projects Name="base_config.exe">base_config\base_config.bdsproj</Projects>
-      <Projects Name="Targets">objects.dll kernel.exe zutils.dll document.dll documents.dll nomens.dll tree.dll popup.dll popups.dll libra_sync.dll massa_k_vpm.exe libra.dll scales.dll nomen.dll users.dll pricelist.dll xreports.dll services.dll invoice.dll groups.dll group.dll user.dll about.dll veles_conf.exe base_config.exe</Projects>
+      <Projects Name="start.dll">start\start.bdsproj</Projects>
+      <Projects Name="Targets">pricelist.dll objects.dll kernel.exe zutils.dll document.dll documents.dll nomens.dll tree.dll popup.dll popups.dll libra_sync.dll libra.dll scales.dll nomen.dll users.dll xreports.dll services.dll invoice.dll groups.dll group.dll user.dll about.dll veles_conf.exe base_config.exe start.dll</Projects>
     </Projects>
     <Dependencies/>
   </Default.Personality>

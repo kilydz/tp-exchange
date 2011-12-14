@@ -1120,6 +1120,21 @@ object fnomenlist: Tfnomenlist
     Transaction = tr_dic
     CachedUpdates = True
     SQL.Strings = (
+      'with recursive'
+      'group_wares_tree  as'
+      '('
+      '    select g.code_group_wares, g.code_parent_group_wares'
+      '        from group_wares g'
+      
+        '        where g.code_group_wares = iif(:icode_group_wares > 2, :' +
+        'icode_group_wares, 2) --7335'
+      '    union all'
+      '    select gr.code_group_wares, gr.code_parent_group_wares'
+      '        from group_wares gr, group_wares_tree'
+      
+        '        where gr.code_parent_group_wares = group_wares_tree.code' +
+        '_group_wares'
+      ')'
       'select'
       '    w.CODE_WARES,           --'#8226'    '#1050#1086#1076' '#1090#1086#1074#1072#1088#1091';'
       '    w.CODE_GROUP,'
@@ -1128,6 +1143,7 @@ object fnomenlist: Tfnomenlist
         '    w.NAME_WARES_RECEIPT,   --'#8226'    '#1050#1086#1088#1086#1090#1082#1072' '#1085#1072#1079#1074#1072' '#1090#1086#1074#1072#1088#1091' '#8211' '#1076#1083#1103' '#1045#1050 +
         #1050#1040';'
       '    w.NAME_WARES_BRAND,     --'#8226'    '#1053#1072#1079#1074#1072' '#1074#1110#1076' '#1087#1086#1089#1090#1072#1095#1072#1083#1100#1085#1080#1082#1072';'
+      '    f.name_for_print as BRAND_NAME, -- '#1042#1080#1088#1086#1073#1085#1080#1082
       
         '    pd.price_dealer,        --'#8226'    '#1062#1110#1085#1072' '#1088#1077#1072#1083#1110#1079#1072#1094#1110#1111' '#8211' '#1094#1110#1085#1072' '#1088#1077#1072#1083#1110#1079 +
         #1072#1094#1110#1111' '#1076#1083#1103' '#1087#1086#1090#1086#1095#1085#1086#1075#1086'  '#1084#1072#1075#1072#1079#1080#1085#1091
@@ -1160,6 +1176,9 @@ object fnomenlist: Tfnomenlist
         #1110#1083#1100#1090#1088#1091' '#1090#1086#1074#1072#1088#1110#1074' '#1087#1086' '#1064#1050';'
       'from WARES w'
       
+        '    inner join group_wares_tree gt on ((w.code_group = gt.code_g' +
+        'roup_wares))'
+      
         '    left join unit_dimension base_ud on (base_ud.code_unit = w.c' +
         'ode_unit)'
       
@@ -1171,56 +1190,25 @@ object fnomenlist: Tfnomenlist
       
         '    left join price_dealer pd on (pd.code_wares = w.code_wares a' +
         'nd pd.code_dealer = :icode_dealer)'
-      ''
-      'where (:icode_group_wares = 0)'
-      '    or'
-      '    (w.code_group in'
-      '            ('
-      '                with recursive'
-      '                group_wares_tree  as'
-      '                ('
-      
-        '                    select g.code_group_wares, g.code_parent_gro' +
-        'up_wares'
-      '                        from group_wares g'
-      
-        '                        where g.code_group_wares = :icode_group_' +
-        'wares --7335'
-      '                    union all'
-      
-        '                    select gr.code_group_wares, gr.code_parent_g' +
-        'roup_wares'
-      '                        from group_wares gr, group_wares_tree'
-      
-        '                        where gr.code_parent_group_wares = group' +
-        '_wares_tree.code_group_wares'
-      '                )'
-      '                select gt.code_group_wares'
-      '                  from group_wares_tree gt'
-      '--              7338'
-      '            )'
-      '        )'
-      'order by   w.CODE_WARES'
-      ''
-      ''
-      '')
+      '    left join firms f on (w.code_brand = f.code_firm)'
+      'order by   w.CODE_WARES')
     UpdateObject = upd_dic
     Left = 208
     Top = 192
     ParamData = <
       item
         DataType = ftUnknown
+        Name = 'icode_group_wares'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'icode_group_wares'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
         Name = 'icode_dealer'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'icode_group_wares'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'icode_group_wares'
         ParamType = ptUnknown
       end>
     object q_dicCODE_WARES: TIntegerField

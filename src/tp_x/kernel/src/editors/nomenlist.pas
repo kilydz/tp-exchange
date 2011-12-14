@@ -258,7 +258,7 @@ begin
 
     if q_dic.Params.FindParam('icode_group_wares') <> nil then
       q_dic.ParamByName('icode_group_wares').AsInteger := grp_id;
-    q_dic.ParamByName('icode_dealer').AsInteger := code_dealer;
+    q_dic.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;
 {     if (descr.mode = 20) then
      begin
        q_dic.ParamByName('igrp_id').AsInteger := (self.descr.forma_prew as Tfeddocument).document_id;
@@ -313,7 +313,7 @@ begin
     'where (w.CODE_WARES = :iCODE_WARES) ';
 
    q_R.ParamByName('iCODE_WARES').AsInteger := q_dic.FieldByName('onomen_id').AsInteger;
-   q_R.ParamByName('icode_dealer').AsInteger := code_dealer;//0;//descr.mode;
+   q_R.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;//0;//descr.mode;
    q_R.ExecQuery;
 
    for i:=0 to q_R.FieldCount-1 do
