@@ -167,8 +167,8 @@ begin
     'group by d.DOC_ID, d.DOC_NUM, d.EDRPOU, d.DOC_DATE, d.CREATED, d.IS_CLOSED';
 
   sql_delete_document   := 'delete from t_docs where doc_id = :idocument_id)';
-  sql_close_document    := 'update t_docs set is_closed = 1 where doc_id = :idocument_id)';
-  sql_unclose_document  := 'update t_docs set is_closed = 0 where doc_id = :idocument_id)';
+  sql_close_document    := 'update t_docs set is_closed = 1 where doc_id = :idocument_id';
+  sql_unclose_document  := 'update t_docs set is_closed = 0 where doc_id = :idocument_id';
 //  sql_unblock_document  := 'update t_documents set blok = 0 where document_id = :idocument_id';
   sql_is_fixed_document := 'select is_closed as is_fixed from t_docs where doc_id = :idocument_id';
   //sql_is_block_document := 'select blok as is_block from t_documents where document_id = :idocument_id';
@@ -249,27 +249,27 @@ begin
       exit;
     end;
  }
-    if q_dic.FieldByName('OIS_FIXED').AsInteger = 0 then
-    begin
-      if not HasUserAccessEx(prm, ACCESS_TO_DOCUMENT_FIX) then
-        Exit
-    end
-    else if q_dic.FieldByName('OIS_FIXED').AsInteger = 1 then
-    begin
-      if (not HasUserAccessEx(prm, ACCESS_TO_DOCUMENT_UNFIX)) then
-        Exit;
-    end;
-    if q_dic.FieldByName('OIS_FIXED').AsInteger > 0 then
-    begin
+//    if q_dic.FieldByName('OIS_FIXED').AsInteger = 0 then
+//    begin
+//      if not HasUserAccessEx(prm, ACCESS_TO_DOCUMENT_FIX) then
+//        Exit
+//    end
+//    else if q_dic.FieldByName('OIS_FIXED').AsInteger = 1 then
+//    begin
+//      if (not HasUserAccessEx(prm, ACCESS_TO_DOCUMENT_UNFIX)) then
+//        Exit;
+//    end;
+//    if q_dic.FieldByName('OIS_FIXED').AsInteger > 0 then
+//    begin
 //      if (q_dic.FieldByName('otypedoc_id').AsInteger in [6, 7, 15]) then
 //      begin
 //        GMessageBox('Неможна відкривати даний тип документу', 'OK');
 //        Exit;
 //      end;
-    end;
+//    end;
 
     mes := 'Ви дійсно бажаєте закрити документ?';
-    if (q_dic.FieldByName('otypedoc_id').AsInteger in [6, 7, 15]) then
+  //  if (q_dic.FieldByName('otypedoc_id').AsInteger in [6, 7, 15]) then
        mes := 'Ви дійсно бажаєте закрити документ?'+#13+'Увага! Ви не зможете відкрити його знову';
     if GMessageBox(mes, 'Так|Ні') <> 1 then
      exit;
