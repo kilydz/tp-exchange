@@ -8,9 +8,7 @@
 			<Option Name="GUID">{0A08857C-0D26-450C-AB51-B59955EAB3CD}</Option>
 		</Option>
 	</PersonalityInfo>
-	<Default.Personality>  
-    
-    <Projects>
+	<Default.Personality>  <Projects>
       <Projects Name="pricelist.dll">pricelist\pricelist.bdsproj</Projects>
       <Projects Name="objects.dll">objects\objects.bdsproj</Projects>
       <Projects Name="kernel.exe">kernel\kernel.bdsproj</Projects>
@@ -36,7 +34,8 @@
       <Projects Name="veles_conf.exe">veles_config\veles_conf.bdsproj</Projects>
       <Projects Name="base_config.exe">base_config\base_config.bdsproj</Projects>
       <Projects Name="start.dll">start\start.bdsproj</Projects>
-      <Projects Name="Targets">pricelist.dll objects.dll kernel.exe zutils.dll document.dll documents.dll nomens.dll tree.dll popup.dll popups.dll libra_sync.dll libra.dll scales.dll nomen.dll users.dll xreports.dll services.dll invoice.dll groups.dll group.dll user.dll about.dll veles_conf.exe base_config.exe start.dll</Projects>
+      <Projects Name="freedom.bpl">..\Zcomp\freedom.bdsproj</Projects>
+      <Projects Name="Targets">pricelist.dll objects.dll kernel.exe zutils.dll document.dll documents.dll nomens.dll tree.dll popup.dll popups.dll libra_sync.dll libra.dll scales.dll nomen.dll users.dll xreports.dll services.dll invoice.dll groups.dll group.dll user.dll about.dll veles_conf.exe base_config.exe start.dll freedom.bpl</Projects>
     </Projects>
     <Dependencies/>
   </Default.Personality>
