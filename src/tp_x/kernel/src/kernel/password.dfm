@@ -15,8 +15,6 @@ object fpassword: Tfpassword
   Position = poDesktopCenter
   OnClose = FormClose
   OnCreate = FormCreate
-  OnHide = FormHide
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object luser_name: TLabel
@@ -57,7 +55,7 @@ object fpassword: Tfpassword
   object ed_user_name: TdxEdit
     Left = 71
     Top = 27
-    Width = 121
+    Width = 234
     Style.BorderStyle = xbsFlat
     Style.ButtonStyle = btsDefault
     TabOrder = 1
@@ -66,7 +64,7 @@ object fpassword: Tfpassword
   object ed_password: TdxEdit
     Left = 71
     Top = 66
-    Width = 121
+    Width = 234
     Style.BorderStyle = xbsFlat
     TabOrder = 2
     PasswordChar = '*'
@@ -101,12 +99,5 @@ object fpassword: Tfpassword
     ModalResult = 2
     ParentFont = False
     TabOrder = 4
-  end
-  object l_anime: TAnimate
-    Left = 198
-    Top = 17
-    Width = 120
-    Height = 70
-    StopFrame = 20
   end
 end
