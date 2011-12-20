@@ -25,9 +25,6 @@ type
     lpassword: TLabel;
     bt_ok: ZButton;
     ZButton1: ZButton;
-    l_anime: TAnimate;
-    procedure FormShow(Sender: TObject);
-    procedure FormHide(Sender: TObject);
     procedure bokClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -90,18 +87,6 @@ begin
   current := GetKeyboardLayout(0);
   latin := LoadKeyboardLayout('00000409', 0);
   ActivateKeyboardLayout(latin, 0);
-
-  l_anime.FileName := veles_info.root_way + WAY_IMAGES + 'key.avi';
-end;
-
-procedure Tfpassword.FormHide(Sender: TObject);
-begin
-  l_anime.Active := false;
-end;
-
-procedure Tfpassword.FormShow(Sender: TObject);
-begin
-  l_anime.Active := true;
 end;
 
 procedure Tfpassword.FormClose(Sender: TObject; var Action: TCloseAction);
