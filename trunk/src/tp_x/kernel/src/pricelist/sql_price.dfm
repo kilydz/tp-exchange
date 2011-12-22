@@ -4,7 +4,7 @@ object fsql_price: Tfsql_price
   BorderStyle = bsToolWindow
   Caption = #1044#1088#1091#1082' '#1094#1110#1085#1085#1080#1082#1110#1074' '#1087#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1091
   ClientHeight = 431
-  ClientWidth = 640
+  ClientWidth = 702
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fsql_price: Tfsql_price
   object pBottom: TPanel
     Left = 0
     Top = 396
-    Width = 640
+    Width = 702
     Height = 35
     Align = alBottom
     BevelOuter = bvNone
@@ -59,7 +59,7 @@ object fsql_price: Tfsql_price
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 640
+    Width = 702
     Height = 25
     Align = alTop
     TabOrder = 1
@@ -79,7 +79,7 @@ object fsql_price: Tfsql_price
     object ed_price_type: TdxImageEdit
       Left = 105
       Top = 2
-      Width = 375
+      Width = 320
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -125,7 +125,7 @@ object fsql_price: Tfsql_price
   object g_dic: TdxDBGrid
     Left = 0
     Top = 25
-    Width = 640
+    Width = 702
     Height = 371
     Bands = <
       item

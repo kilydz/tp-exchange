@@ -317,7 +317,7 @@ begin
          mem_printoutprice.AsFloat := q_R.FieldByName('ooutprice').AsFloat;
          mem_printdatex_name.AsString := q_R.FieldByName('odatex_name').AsString;
          mem_printmaker_point.AsString := q_R.FieldByName('omaker_point').AsString;
-         mem_printis_in_discount.AsInteger := mem_dicis_in_discount.AsInteger;}
+         mem_printis_in_discount.AsInteger := mem_dicis_in_discount.AsInteger;  }
          mem_print.Post;
          cnt := cnt - 1;
          num := num + 1;

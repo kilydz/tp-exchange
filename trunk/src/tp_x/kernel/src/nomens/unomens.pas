@@ -13,35 +13,13 @@ uses
 
 type
   Tfnomens = class(Tfetalon_dic)
-    ed_flag: TdxImageEdit;
-    ToolButton2: TToolButton;
     ed_grp_id: TdxPopupEdit;
-    lGRP: TLabel;
-    l_grp: TStaticText;
-    lNomenCode: TLabel;
-    l_code: TStaticText;
-    lNomenName: TLabel;
-    l_full_name: TStaticText;
-    lDatexName: TLabel;
-    l_short_name: TStaticText;
-    lSi: TLabel;
-    l_si: TStaticText;
-    lSpecGroup: TLabel;
-    l_sg: TStaticText;
-    lMaker: TLabel;
-    l_maker: TStaticText;
-    lTypePDV: TLabel;
-    l_type_PDV: TStaticText;
     mi_like: TMenuItem;
     mi_prices: TMenuItem;
     mi_pricejournal: TMenuItem;
     mi_moving: TMenuItem;
     mi_nomen_prm: TMenuItem;
     mi_pricelist: TMenuItem;
-    Label1: TLabel;
-    ed_count: TdxSpinEdit;
-    Label2: TLabel;
-    BSlivMinus: TBitBtn;
     q_dicCODE_WARES: TIntegerField;
     q_dicCODE_GROUP: TIntegerField;
     q_dicNAME_WARES: TIBStringField;
@@ -213,7 +191,6 @@ begin
     ed_grp_id.PopupControl := tree_prm.Panel;
   end;
   grp_id := 0;
-  ed_flag.Text := '0';
 
   is_new_project := true;
   ins_upd_func_name := 'NomenDialog';
@@ -223,15 +200,6 @@ begin
  // ListClear(g_dicOSG_ID);
 //  ListInit(g_dicOSG_ID, 'select sg_id as id, sg_name as name from T_SPEC_GROUPS');
 
-   // Перевірка можливості редагування властивостей товару
-{  if (GetConfig(prm.db_handle, 400, 'store_nomen') = 'yes') then
-  begin
-    bt_ins.Visible        := False;
-    bt_del.Visible        := False;
-    p_main_tool_bar.Width := p_main_tool_bar.Width - 46;
-    mi_like.Visible       := False;
-   // mi_unite.Visible      := False;
-  end;}
 end;
 
 procedure Tfnomens.RefreshDic;

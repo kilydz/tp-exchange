@@ -26,7 +26,7 @@ inherited fclient_popup: Tfclient_popup
         Left = 126
         Top = 2
         Width = 332
-        Height = 21
+        Height = 22
         AutoSize = True
         ButtonHeight = 21
         Caption = 'XToolBar1'

@@ -6,7 +6,7 @@ inherited fdocrec_dr1: Tfdocrec_dr1
   ClientWidth = 553
   OldCreateOrder = True
   ExplicitWidth = 561
-  ExplicitHeight = 347
+  ExplicitHeight = 354
   PixelsPerInch = 96
   TextHeight = 13
   inherited master: ZMaster
@@ -33,8 +33,6 @@ inherited fdocrec_dr1: Tfdocrec_dr1
       Width = 15
       Height = 13
       Caption = #1062#1047
-      Enabled = False
-      Visible = False
     end
     object Label4: TLabel [2]
       Left = 215
@@ -42,8 +40,6 @@ inherited fdocrec_dr1: Tfdocrec_dr1
       Width = 14
       Height = 13
       Caption = #1057#1047
-      Enabled = False
-      Visible = False
     end
     object Label3: TLabel [3]
       Left = 8
@@ -96,20 +92,16 @@ inherited fdocrec_dr1: Tfdocrec_dr1
     inherited ed_price: TdxCalcEdit
       Left = 247
       Top = 82
-      Enabled = False
       TabOrder = 4
-      Visible = False
       ExplicitLeft = 247
       ExplicitTop = 82
     end
     inherited ed_sum: TdxCalcEdit
       Left = 247
-      Top = 114
-      Enabled = False
+      Top = 109
       TabOrder = 5
-      Visible = False
       ExplicitLeft = 247
-      ExplicitTop = 114
+      ExplicitTop = 109
     end
     inherited ed_price_pdv: TdxCalcEdit
       Left = 88

@@ -15,11 +15,7 @@ uses
   SysUtils,
   Classes,
   uTreeGrpForm in 'uTreeGrpForm.pas' {fTree},
-  uTreeGrpFormC in 'uTreeGrpFormC.pas' {fTreeC},
-  ubranchC in 'ubranchC.pas' {fbranchC},
-  uTreeGrpFormLC in 'uTreeGrpFormLC.pas' {fTreeLC},
-  etalon_dlg in '..\..\lib\etalons\etalon_dlg.pas' {fetalon_dlg},
-  ubranch in 'ubranch.pas' {fbranch};
+  etalon_dlg in '..\..\lib\etalons\etalon_dlg.pas' {fetalon_dlg};
 
 {$R *.res}
 
@@ -30,9 +26,7 @@ exports TreeSelectionsSpace;
 exports TreeToGroup;
 exports TreeHideShow;
 exports TreeRelase;
-
-exports BranchDialog;
-
+   {
 exports TreeCreateC;
 exports TreeRefreshC;
 exports TreeSelectionsC;
@@ -48,4 +42,7 @@ exports TreeSelectionsLC;
 exports TreeToGroupLC;
 exports TreeHideShowLC;
 exports TreeRelaseLC;
+    }
+begin
+
 end.

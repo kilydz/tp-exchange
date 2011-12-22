@@ -8,7 +8,7 @@ inherited feddocument: Tfeddocument
   DefaultMonitor = dmDesktop
   OldCreateOrder = True
   ExplicitWidth = 675
-  ExplicitHeight = 550
+  ExplicitHeight = 557
   PixelsPerInch = 96
   TextHeight = 13
   inherited Splitter1: TSplitter
@@ -29,11 +29,15 @@ inherited feddocument: Tfeddocument
   inherited ZControlBar2: ZControlBar
     Width = 667
     ExplicitWidth = 667
+    inherited tool_bar: ZToolBar
+      Width = 126
+      ExplicitWidth = 126
+    end
     object ZToolBar1: ZToolBar
-      Left = 230
+      Left = 150
       Top = 2
       Width = 147
-      Height = 22
+      Height = 21
       AutoSize = True
       ButtonHeight = 21
       Caption = 'XToolBar1'
@@ -62,8 +66,6 @@ inherited feddocument: Tfeddocument
     Height = 160
     KeyField = 'DOC_REC_ID'
     Filter.Criteria = {00000000}
-    ExplicitLeft = 0
-    ExplicitTop = 129
     ExplicitWidth = 517
     ExplicitHeight = 160
     object g_dicDOC_REC_ID: TdxDBGridMaskColumn
@@ -126,8 +128,8 @@ inherited feddocument: Tfeddocument
     ExplicitHeight = 230
   end
   object Panel1: TPanel [5]
-    Left = 105
-    Top = 184
+    Left = 230
+    Top = 224
     Width = 265
     Height = 145
     Caption = 'Panel1'

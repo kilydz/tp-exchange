@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011.12.19 22:43:41.453.pas,D:\Documents and Settings\sokol\Мои документы\Borland Studio Projects\Unit1.pas=X:\tp\src_kassa\umain.pas</Transaction>
+    <Transaction>2011.12.19 22:43:41.453.dfm,D:\Documents and Settings\sokol\Мои документы\Borland Studio Projects\Unit1.dfm=X:\tp\src_kassa\umain.dfm</Transaction>
+    <Transaction>2011.12.19 22:43:56.765.bdsproj,D:\Documents and Settings\sokol\Мои документы\Borland Studio Projects\Project1.bdsproj=X:\tp\src_kassa\tp2kassa.bdsproj</Transaction>
+    <Transaction>2011.12.20 11:46:01.359.pas,X:\tp\src_kassa\Unit1.pas=X:\tp\src_kassa\global_h.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -150,7 +150,7 @@
 			<VersionInfo Name="MajorVer">1</VersionInfo>
 			<VersionInfo Name="MinorVer">0</VersionInfo>
 			<VersionInfo Name="Release">0</VersionInfo>
-			<VersionInfo Name="Build">370</VersionInfo>
+			<VersionInfo Name="Build">375</VersionInfo>
 			<VersionInfo Name="Debug">False</VersionInfo>
 			<VersionInfo Name="PreRelease">False</VersionInfo>
 			<VersionInfo Name="Special">False</VersionInfo>
@@ -162,7 +162,7 @@
 		<VersionInfoKeys>
 			<VersionInfoKeys Name="CompanyName">Конкурент-Л</VersionInfoKeys>
 			<VersionInfoKeys Name="FileDescription"></VersionInfoKeys>
-			<VersionInfoKeys Name="FileVersion">1.0.0.370</VersionInfoKeys>
+			<VersionInfoKeys Name="FileVersion">1.0.0.375</VersionInfoKeys>
 			<VersionInfoKeys Name="InternalName"></VersionInfoKeys>
 			<VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys>
 			<VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
@@ -170,7 +170,9 @@
 			<VersionInfoKeys Name="ProductName"></VersionInfoKeys>
 			<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 			<VersionInfoKeys Name="Comments"></VersionInfoKeys>
-		</VersionInfoKeys>  <Excluded_Packages>
+		</VersionInfoKeys>  
+    
+    <Excluded_Packages>
       <Excluded_Packages Name="C:\Users\Grisha\Documents\Borland Studio Projects\Bpl\softwest.bpl">SoftWest components</Excluded_Packages>
       <Excluded_Packages Name="c:\program files\borland\bds\4.0\Bin\dclIntraweb_80_100.bpl">File c:\program files\borland\bds\4.0\Bin\dclIntraweb_80_100.bpl not found</Excluded_Packages>
       <Excluded_Packages Name="c:\program files\borland\bds\4.0\RaveReports\Lib\dclRave.bpl">File c:\program files\borland\bds\4.0\RaveReports\Lib\dclRave.bpl not found</Excluded_Packages>

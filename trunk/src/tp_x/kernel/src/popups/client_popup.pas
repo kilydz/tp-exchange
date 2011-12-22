@@ -111,7 +111,7 @@ begin
   sql_fill_popup_edit := 'select name as fill_line from t_clients where clients_id = :idocument_id';
   
   dic_refresh_enabled := false;
-
+ {
   if @tree_prm.OnChengeBranch = nil then
   begin
     tree_prm.sGen := prm;
@@ -121,7 +121,7 @@ begin
     tree_prm.Visible := false;
     TreeCreateC(tree_prm);
     ed_grpc_id.PopupControl := tree_prm.Panel;
-  end;
+  end;  }
   grpc_id := 0;
 
   is_new_project := true;
@@ -150,7 +150,7 @@ end;
 
 procedure Tfclient_popup.FormDestroy(Sender: TObject);
 begin
-  TreeRelaseC(tree_prm);
+ // TreeRelaseC(tree_prm);
 end;
 
 end.

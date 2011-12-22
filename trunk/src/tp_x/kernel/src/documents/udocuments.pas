@@ -16,32 +16,8 @@ type
   Tfdocuments = class(Tfetalon_dic)
     ed_date_0: TdxDateEdit;
     ed_date_1: TdxDateEdit;
-    Label1: TLabel;
-    l_number: TStaticText;
-    Label2: TLabel;
-    l_token: TStaticText;
-    Label3: TLabel;
-    l_date: TStaticText;
-    Label4: TLabel;
-    l_sum_in: TStaticText;
-    Label5: TLabel;
-    l_sum_out: TStaticText;
     mi_prices: TMenuItem;
     ed_filter: TdxPopupEdit;
-    Label6: TLabel;
-    Label7: TLabel;
-    l_sum_in_pdv: TStaticText;
-    l_sum_out_pdv: TStaticText;
-    Label8: TLabel;
-    l_liable: TStaticText;
-    Label9: TLabel;
-    l_src_fullname: TStaticText;
-    Label10: TLabel;
-    l_src_name: TStaticText;
-    Label11: TLabel;
-    l_dst_fullname: TStaticText;
-    Label12: TLabel;
-    l_dst_name: TStaticText;
     mi_markup: TMenuItem;
     mi_print: TMenuItem;
     N3: TMenuItem;
@@ -56,8 +32,6 @@ type
     RxLabel2: TRxLabel;
     mi_export_td2: TMenuItem;
     mi_orders_view: TMenuItem;
-    ZToolButton1: ZToolButton;
-    bt_pays: ZToolButton;
     q_dicDOC_ID: TIntegerField;
     q_dicDOC_NUM: TIBStringField;
     q_dicEDRPOU: TIBStringField;
@@ -301,7 +275,7 @@ begin
     if IsRecordNull then
       exit;
 
-    if (not (q_dic.FieldByName('otypedoc_id').AsInteger in  [ 1, 2])) then
+    if (not (q_dic.FieldByName('otypedoc_id').AsInteger in  [1,2])) then
     begin
       GMessageBox('В реєстр можна додавати лише прихідні та розхідні накладні.', 'OK');
       Exit;
