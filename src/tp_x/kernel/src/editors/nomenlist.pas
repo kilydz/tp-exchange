@@ -54,12 +54,6 @@ type
     tr_W: TIBTransaction;
     q_W: TIBSQL;
     Im_meny: TImageList;
-    p_markup: TPanel;
-    is_markups: TCheckBox;
-    ed_markup: TdxSpinEdit;
-    ed_type_discount: TdxImageEdit;
-    p_is_aut: TPanel;
-    edOut: TSpeedButton;
     bt_ins: ZToolButton;
     bt_upd: ZToolButton;
     bt_del: ZToolButton;

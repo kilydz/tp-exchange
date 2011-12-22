@@ -167,7 +167,7 @@ begin
   resulted.docrec_id := 0;
   resulted.nomen.code_wares := nomen_id;
   resulted.code_unit := code_unit;
-  resulted.kilk := 0;//resulted.document.default_kilk;
+  resulted.kilk := 1;//resulted.document.default_kilk;
   resulted.price_pdv := 0.00;
   resulted.price := 0.00;
 
@@ -339,27 +339,31 @@ begin
  end;
 
 end;
-
+/////////////////////////////////////////////
+// тут треба робити аналіз нових типв пдв
+/////////////////////////////////////////////
 function Tfetalon_dr.CalcPrice: real;
 begin
-  {Result := 0.00;
+  Result := 0.00;
   if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
     Result := resulted.price_pdv
   else if (resulted.typepdv_id = 3) then
-    Result := resulted.price_pdv / 1.2;}
+    Result := resulted.price_pdv / 1.2;
   Result := 0;
 end;
 
 function Tfetalon_dr.CalcPricePDV: real;
 begin
-  {  Result := 0.00;
+    Result := 0.00;
   if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
     Result := resulted.price
   else if (resulted.typepdv_id = 3) then
-    Result := resulted.price * 1.2;}
+    Result := resulted.price * 1.2;
   Result := resulted.price_pdv;
 end;
-
+/////////////////////////////////////////////
+// тут треба робити аналіз нових типв пдв
+/////////////////////////////////////////////
 function Tfetalon_dr.CalcFromKilk: real;
 begin
   if refresh_enabled then
@@ -400,7 +404,7 @@ end;
 
 function Tfetalon_dr.CalcFromPrice: real;
 begin
-{  if refresh_enabled then
+  if refresh_enabled then
   begin
     refresh_enabled := false;
 
@@ -415,7 +419,7 @@ begin
 
     refresh_enabled := true;
   end;
-  CalcFromPrice := resulted.price;}
+  CalcFromPrice := resulted.price;
   Result := 0;
 end;
 
@@ -445,7 +449,7 @@ end;
 
 function Tfetalon_dr.CalcFromSum: real;
 begin
-{  if refresh_enabled then
+  if refresh_enabled then
   begin
     refresh_enabled := false;
 
@@ -464,7 +468,7 @@ begin
 
     refresh_enabled := true;
   end;
-  CalcFromSum := resulted.sum;}
+  CalcFromSum := resulted.sum;
   Result := 0;
 end;
 

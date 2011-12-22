@@ -11,12 +11,6 @@ uses
 type
   TfTree = class(TForm)
     Panel1: TPanel;
-    PopupMenu: TPopupMenu;
-    N1: TMenuItem;
-    N2: TMenuItem;
-    N5: TMenuItem;
-    N4: TMenuItem;
-    N3: TMenuItem;
     Base: TIBDatabase;
     tr: TIBTransaction;
     q: TIBSQL;

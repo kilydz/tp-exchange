@@ -45,7 +45,6 @@ object fTree: TfTree
       Align = alClient
       Ctl3D = False
       ParentCtl3D = False
-      PopupMenu = PopupMenu
       TabOrder = 0
       LookAndFeel = lfUltraFlat
       Options = [aoColumnSizing, aoColumnMoving, aoTabThrough, aoRowSelect, aoMultiSelect, aoAutoWidth, aoExtMultiSelect, aoAutoSort]
@@ -84,6 +83,7 @@ object fTree: TfTree
       Caption = 'ToolBar1'
       Images = ImageList1
       TabOrder = 1
+      Visible = False
       object bt_ins: ZToolButton
         Left = 0
         Top = 0
@@ -170,37 +170,6 @@ object fTree: TfTree
         Down = False
         ImageIndex = 3
       end
-    end
-  end
-  object PopupMenu: TPopupMenu
-    Images = ImageList1
-    Left = 8
-    Top = 112
-    object N1: TMenuItem
-      Caption = #1044#1086#1076#1072#1090#1080' '#1075#1110#1083#1082#1091
-      ImageIndex = 1
-      ShortCut = 45
-      OnClick = ToolButton1Click
-    end
-    object N2: TMenuItem
-      Caption = #1047#1084#1110#1085#1080#1090#1080' '#1075#1110#1083#1082#1091
-      ImageIndex = 2
-      ShortCut = 16429
-      OnClick = bt_editClick
-    end
-    object N5: TMenuItem
-      Caption = #1042#1080#1076#1072#1083#1080#1090#1080' '#1075#1110#1083#1082#1091
-      ImageIndex = 3
-      ShortCut = 46
-      OnClick = ToolButton4Click
-    end
-    object N4: TMenuItem
-      Caption = '-'
-    end
-    object N3: TMenuItem
-      Caption = #1054#1073#1085#1086#1074#1080#1090#1080
-      ImageIndex = 4
-      OnClick = ToolButton3Click
     end
   end
   object Base: TIBDatabase

@@ -32,12 +32,6 @@ type
     g_detaileODESCRIPT: TdxDBGridMaskColumn;
     g_detaileOPOSITION: TdxDBGridMaskColumn;
     g_detaileOTYPE: TdxDBGridImageColumn;
-    lNomenCode: TLabel;
-    l_code: TStaticText;
-    lNomenName: TLabel;
-    l_name: TStaticText;
-    l_descript: TdxMemo;
-    Label1: TLabel;
     bt_do_report: ZToolButton;
     procedure tool_buttonClick(Sender: TObject);
     procedure pg_pagesChange(Sender: TObject);
@@ -104,12 +98,8 @@ end;
 
 procedure Tfreportlist.RefreshDetaile;
 begin
-  if detail_refresh_enabled and (pg_pages.TabIndex = 1) then
+  if detail_refresh_enabled then
   begin
-    l_code.Caption        := q_dic.FieldByName('oreport_id').AsString;
-    l_name.Caption        := q_dic.FieldByName('oname').AsString;
-    l_descript.Text       := q_dic.FieldByName('odescript').AsString;
-
     q_detaile.Close;
     if tr_detaile.InTransaction then tr_detaile.Commit;
     tr_detaile.StartTransaction;
