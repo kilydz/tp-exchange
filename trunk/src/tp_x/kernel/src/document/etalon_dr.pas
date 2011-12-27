@@ -344,21 +344,21 @@ end;
 /////////////////////////////////////////////
 function Tfetalon_dr.CalcPrice: real;
 begin
-  Result := 0.00;
-  if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
-    Result := resulted.price_pdv
-  else if (resulted.typepdv_id = 3) then
-    Result := resulted.price_pdv / 1.2;
+//  Result := 0.00;
+//  if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
+//    Result := resulted.price_pdv
+//  else if (resulted.typepdv_id = 3) then
+//    Result := resulted.price_pdv / 1.2;
   Result := 0;
 end;
 
 function Tfetalon_dr.CalcPricePDV: real;
 begin
     Result := 0.00;
-  if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
-    Result := resulted.price
-  else if (resulted.typepdv_id = 3) then
-    Result := resulted.price * 1.2;
+//  if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
+//    Result := resulted.price
+//  else if (resulted.typepdv_id = 3) then
+//    Result := resulted.price * 1.2;
   Result := resulted.price_pdv;
 end;
 /////////////////////////////////////////////
