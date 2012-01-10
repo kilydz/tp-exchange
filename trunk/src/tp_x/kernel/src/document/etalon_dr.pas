@@ -37,6 +37,7 @@ type
     q_dicDEFAULT_UNIT: TIBStringField;
     ds_dic: TDataSource;
     ed_code_unit: TdxLookupEdit;
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btn1Click(Sender: TObject);
     procedure masterMasterResult(Sender: TObject;
       MasterResult: ZMasterResult); virtual;
@@ -202,6 +203,7 @@ begin
   resulted.kilk              := qR.FieldByName('quantity').AsDouble;
   resulted.price_pdv         := qR.FieldByName('price_with_vat').AsDouble;
   resulted.vat               := qR.FieldByName('vat').AsDouble;
+  resulted.price             := resulted.price_pdv / ( 1 + resulted.vat/100);
   resulted.nomen.name_wares  := qR.FieldByName('name_wares').AsString;
   if(trR.InTransaction) then trR.Commit;
 //  old_inprice := CurrentOldInPricePDV;
@@ -349,17 +351,18 @@ begin
 //    Result := resulted.price_pdv
 //  else if (resulted.typepdv_id = 3) then
 //    Result := resulted.price_pdv / 1.2;
-  Result := 0;
+
+  Result := resulted.price_pdv / (1 + resulted.vat/100);
 end;
 
 function Tfetalon_dr.CalcPricePDV: real;
 begin
-    Result := 0.00;
+//    Result := 0.00;
 //  if ((resulted.typepdv_id = 1) or (resulted.typepdv_id = 2)) then
 //    Result := resulted.price
 //  else if (resulted.typepdv_id = 3) then
 //    Result := resulted.price * 1.2;
-  Result := resulted.price_pdv;
+  Result := resulted.price * (1 + resulted.vat/100);
 end;
 /////////////////////////////////////////////
 // тут треба робити аналіз нових типв пдв
@@ -646,6 +649,19 @@ begin
 //
 end;
 
+procedure Tfetalon_dr.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var currWin: TWinControl;
+begin
+//  ShowMessage('KeyPrev: '+ActiveControl.ClassName);
+  currWin := TWinControl(ActiveControl);
+
+  if ActiveControl.ClassName = 'TdxLookupEdit' then
+    if (Key = VK_RETURN) then
+      master.SetFocusAtNextEdit(TControl(currWin));
+
+end;
+
 procedure Tfetalon_dr.EditsChange(Sender: TObject);
 var currWin: TWinControl;
 begin
@@ -663,7 +679,7 @@ begin
   begin
     CalcFromSumPDV;
   end
-{  else if currWin = ed_price then
+  else if currWin = ed_price then
   begin
     CalcFromPrice;
   end
@@ -671,7 +687,7 @@ begin
   begin
     CalcFromSum;
   end
-}
+
 end;
 
 end.

@@ -32,6 +32,9 @@ type
     qW: TIBSQL;
     tray_icon: TTrayIcon;
     mi_exit: TMenuItem;
+    miMode: TMenuItem;
+    miModeSet: TMenuItem;
+    procedure miModeSetClick(Sender: TObject);
     procedure tab_setChange(Sender: TObject; NewTab: Integer;
       var AllowChange: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -563,6 +566,58 @@ procedure Tfmain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:=false;
   AppMinimize(Sender);
+end;
+
+procedure Tfmain.miModeSetClick(Sender: TObject);
+var
+  mode_name_new, mode_name: string;
+  mes: PAnsiChar;
+  mode_id, mode_id_new: Integer;
+begin
+  mode_id := -1;
+  mode_name := 'Невизначено';
+  try
+    if trR.InTransaction then trR.Commit;
+    trR.StartTransaction;
+    qR.SQL.Text :=
+      'select s.TP_MODE_ID, m.name' + #13#10 +
+      'from T_TP_STATES s' + #13#10 +
+        'left join ts_tp_modes m on m.tp_mode_id = s.tp_mode_id';
+    qR.ExecQuery;
+    if qR.RecordCount > 0 then
+    begin
+      mode_id := qR.FieldByName('TP_MODE_ID').AsInteger;
+      mode_name := qR.FieldByName('name').AsString;
+    end;
+    qR.Close;
+    if trR.InTransaction then trR.Commit;
+  except
+  end;
+
+  if mode_id = 0 then
+  begin
+    mode_id_new := 2;
+    mode_name_new := 'ВІДНОВЛЕННЯ';
+  end
+  else
+  begin
+    mode_id_new := 0;
+    mode_name_new := 'АВАРІЙНИЙ';
+  end;
+
+  mes := PAnsiChar('Торгова площадка знаходиться в режимі "'+mode_name+'".'+#13#10#13#10+
+  'Встановити режим "'+mode_name_new+'" ?');
+  if GMessageBox(mes, 'Так|Ні') = 1 then
+  begin
+    if trW.InTransaction then trW.Commit;
+    trW.StartTransaction;
+    if mode_id_new = 2 then
+      qW.SQL.Text := ' update T_TP_STATES set TP_MODE_ID = 2 where TP_MODE_ID = 0'
+    else
+      qW.SQL.Text := ' update T_TP_STATES set TP_MODE_ID = 0 where TP_MODE_ID <> 0';
+    qW.ExecQuery;
+    if trW.InTransaction then trW.Commit;
+  end;
 end;
 
 procedure Tfmain.mi_exitClick(Sender: TObject);

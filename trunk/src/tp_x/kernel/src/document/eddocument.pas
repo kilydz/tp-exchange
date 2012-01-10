@@ -115,6 +115,9 @@ begin
   inherited InitInfo;
 
   Caption := 'Редагування документа № ' + IntToStr(resulted.document_id);
+  if resulted.name_firm <> '' then
+    Caption := Caption + ' для '+ resulted.name_firm;
+  
 
   document_id := resulted.document_id;
 

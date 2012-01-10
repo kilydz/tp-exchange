@@ -68,6 +68,8 @@ type
     g_detaileSUMA_WITH_VAT: TdxDBGridMaskColumn;
     q_detaileQUANTITY: TFloatField;
     g_detaileQUANTITY: TdxDBGridMaskColumn;
+    q_dicNAME_SUPPLIER: TIBStringField;
+    g_dicNAME_SUPPLIER: TdxDBGridMaskColumn;
     procedure q_dicAfterScroll(DataSet: TDataSet);
 
     procedure mi_Click(Sender: TObject);
@@ -132,15 +134,20 @@ end;
 procedure Tfdocuments.InitInfo;
 begin
   sql_refresh_document  :=
-  'select d.DOC_ID, d.DOC_NUM, d.EDRPOU, d.DOC_DATE, d.CREATED, d.IS_CLOSED,' + #13#10 +
-    'sum(dr.price_with_vat / (dr.vat/100 + 1) * dr.quantity) as DOC_SUM,' + #13#10 +
-    'sum(dr.price_with_vat  * dr.quantity) as DOC_SUM_WITH_PDV' + #13#10 +
-    'from T_DOCS d' + #13#10 +
-        'left join t_doc_recs dr on d.doc_id = dr.doc_id' + #13#10 +
-    'where d.doc_id = :idocument_id' + #13#10 +
-    'group by d.DOC_ID, d.DOC_NUM, d.EDRPOU, d.DOC_DATE, d.CREATED, d.IS_CLOSED';
 
-  sql_delete_document   := 'delete from t_docs where doc_id = :idocument_id)';
+  'select d.DOC_ID, d.DOC_NUM, d.EDRPOU, d.DOC_DATE, d.CREATED, d.IS_CLOSED,' + #13#10 +
+    '(select sum(dr.price_with_vat / (dr.vat/100 + 1) * dr.quantity)' + #13#10 +
+      'from t_doc_recs dr where d.doc_id = dr.doc_id)' + #13#10 +
+      'as DOC_SUM,' + #13#10 +
+    '(select sum(dr.price_with_vat  * dr.quantity)' + #13#10 +
+      'from t_doc_recs dr where d.doc_id = dr.doc_id)' + #13#10 +
+      'as DOC_SUM_WITH_PDV,' + #13#10 +
+    '(select first (1) f.name from firms f where d.edrpou = f.code_zip)' + #13#10 +
+      'as name_supplier' + #13#10 +
+    'from T_DOCS d' + #13#10 +
+    'where d.doc_id = :idocument_id';
+
+  sql_delete_document   := 'delete from t_docs where doc_id = :idocument_id';
   sql_close_document    := 'update t_docs set is_closed = 1 where doc_id = :idocument_id';
   sql_unclose_document  := 'update t_docs set is_closed = 0 where doc_id = :idocument_id';
 //  sql_unblock_document  := 'update t_documents set blok = 0 where document_id = :idocument_id';
@@ -453,16 +460,21 @@ begin
         price_sql :=
         'with dr_wares as' + #13#10 +
         '(' + #13#10 +
-            'select distinct dr.code_wares' + #13#10 +
-            'from t_doc_recs dr where dr.doc_id in ('+docs_ids+')' + #13#10 +
+              'select dr.code_wares,' + #13#10 +
+                //'cast (sum(iif(dr.quantity <> trunc(dr.quantity, 0), 0, dr.quantity)) as integer) as qnt' + #13#10 +
+                'cast (sum(iif(ud.sign_divisional = ''Y'', 0, dr.quantity)) as integer) as qnt' + #13#10 +
+              'from t_doc_recs dr '+ #13#10 +
+                'left join unit_dimension ud on ud.code_unit = dr.code_unit'+ #13#10 +
+              ' where dr.doc_id in ('+docs_ids+')' + #13#10 +
+              'group by dr.code_wares'+ #13#10 +
         ')' + #13#10 +
         'select w.code_wares as onomen_id, w.code_wares as onomen_code,' + #13#10 +
                'w.NAME_WARES_RECEIPT as onomen_name, pd.price_dealer as ooutprice,' + #13#10 +
-               '0 ois_in_discount, 1 as oprint_it' + #13#10 +
+               '0 ois_in_discount, 1 as oprint_it, dr_wares.qnt as oprint_cnt' + #13#10 +
         'from wares w' + #13#10 +
             'inner join dr_wares on (w.code_wares = dr_wares.code_wares)' + #13#10 +
             'left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer ='+
-            IntToStr(prm.custom_data.code_dealer)+')';
+            IntToStr(prm.custom_data.pcode_dealer^)+')';
         lpPricesBySQL(price_sql, prm);
       end;
       FreeLibrary(lib_handle);

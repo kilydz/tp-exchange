@@ -121,6 +121,15 @@ object fsql_price: Tfsql_price
         '7'
         '8')
     end
+    object btn1: TButton
+      Left = 600
+      Top = 3
+      Width = 99
+      Height = 18
+      Caption = #1055#1086' '#1086#1076#1085#1086#1084#1091
+      TabOrder = 1
+      OnClick = btn1Click
+    end
   end
   object g_dic: TdxDBGrid
     Left = 0

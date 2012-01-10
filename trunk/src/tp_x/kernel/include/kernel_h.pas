@@ -157,7 +157,8 @@ type
     ZCustom_data = record
         DateLife:     TDateTime;        //Для не сумісності
         DateOfDeath : TDateTime;        //Дата завершення ліцензії
-        code_dealer: Integer;
+//        code_dealer: Integer;
+        pcode_dealer: ^Integer;
     end;
 
     //структура, що містить інформацію про програму, яка передається модулям

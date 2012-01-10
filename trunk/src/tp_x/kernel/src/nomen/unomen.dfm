@@ -7,7 +7,7 @@ inherited fnomen: Tfnomen
   DefaultMonitor = dmMainForm
   OldCreateOrder = True
   ExplicitWidth = 618
-  ExplicitHeight = 370
+  ExplicitHeight = 368
   PixelsPerInch = 96
   TextHeight = 13
   inherited master: ZMaster

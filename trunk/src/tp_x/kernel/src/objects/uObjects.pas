@@ -60,13 +60,14 @@ begin
     Form1 := TForm1.Create(nil);
     Form1.prm := prm;
     Form1.IBDatabase1.SetHandle(prm.db_handle);
-    Form1.object_id := prm.custom_data.code_dealer;
+    Form1.object_id := prm.custom_data.pcode_dealer^;
 
     Result := Form1.ShowModal;
 
     if Result = mrOk then
     begin
-      prm.custom_data.code_dealer := Form1.IBQuery1.FieldByName('oid').AsInteger;
+//      prm.custom_data.code_dealer := Form1.IBQuery1.FieldByName('oid').AsInteger;
+      prm.custom_data.pcode_dealer^ := Form1.IBQuery1.FieldByName('oid').AsInteger;
 
       TStatusBar(prm.control_pointers.status_bar_ptr).Panels[1].Text :=
         'Магазин: ' + Form1.IBQuery1.FieldByName('oname').AsString;
@@ -80,7 +81,7 @@ begin
               SendMessage(mm.Modules[i].Pages[j].page_form.Handle, UM_REFRESH_DIC, 0, 0);
       end;
 
-      iniFile.WriteInteger('Object', 'Active', prm.custom_data.code_dealer);
+      iniFile.WriteInteger('Object', 'Active', prm.custom_data.pcode_dealer^);
     end;
 
   finally
@@ -102,7 +103,8 @@ begin
     iniFile.Free;
 //    if ObjectId = -1 then exit
 //    else
-    prm.custom_data.code_dealer := objectId;
+//    prm.custom_data.code_dealer := objectId;
+    prm.custom_data.pcode_dealer^ := objectId;
 
     DM := TDataModule1.Create(nil);
     DM.IBDatabase1.SetHandle(prm.db_handle);
@@ -110,7 +112,7 @@ begin
     DM.IBSQL1.SQL.Text := 'select CODE_DEALER as OID, NAME_DEALER as ONAME from DEALER where CODE_DEALER = :iobject_id';
     if DM.IBTransaction1.InTransaction then DM.IBTransaction1.Commit;
     DM.IBTransaction1.StartTransaction;
-    DM.IBSQL1.ParamByName('iobject_id').AsInteger := prm.custom_data.code_dealer;
+    DM.IBSQL1.ParamByName('iobject_id').AsInteger := prm.custom_data.pcode_dealer^;
     DM.IBSQL1.ExecQuery;
     objectName := DM.IBSQL1.FieldByName('oname').AsString;
     new_objectId := DM.IBSQL1.FieldByName('oid').AsInteger;

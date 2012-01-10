@@ -8,7 +8,7 @@ inherited feddocument: Tfeddocument
   DefaultMonitor = dmDesktop
   OldCreateOrder = True
   ExplicitWidth = 675
-  ExplicitHeight = 557
+  ExplicitHeight = 550
   PixelsPerInch = 96
   TextHeight = 13
   inherited Splitter1: TSplitter
@@ -72,6 +72,10 @@ inherited feddocument: Tfeddocument
       BandIndex = 0
       RowIndex = 0
       FieldName = 'DOC_REC_ID'
+      SummaryFooterType = cstCount
+      SummaryFooterField = 'DOC_REC_ID'
+      SummaryType = cstCount
+      SummaryField = 'DOC_REC_ID'
     end
     object g_dicCODE_WARES: TdxDBGridMaskColumn
       BandIndex = 0
@@ -97,6 +101,8 @@ inherited feddocument: Tfeddocument
       BandIndex = 0
       RowIndex = 0
       FieldName = 'QUANTITY'
+      SummaryFooterType = cstSum
+      SummaryField = 'QUANTITY'
     end
     object g_dicPRICE: TdxDBGridMaskColumn
       BandIndex = 0
@@ -107,6 +113,8 @@ inherited feddocument: Tfeddocument
       BandIndex = 0
       RowIndex = 0
       FieldName = 'SUMA'
+      SummaryFooterType = cstSum
+      SummaryField = 'SUMA'
     end
     object g_dicPRICE_WITH_VAT: TdxDBGridMaskColumn
       BandIndex = 0
@@ -117,6 +125,8 @@ inherited feddocument: Tfeddocument
       BandIndex = 0
       RowIndex = 0
       FieldName = 'SUMA_WITH_VAT'
+      SummaryFooterType = cstSum
+      SummaryField = 'SUMA_WITH_VAT'
     end
   end
   inherited p_choicer: TPanel
@@ -271,7 +281,9 @@ inherited feddocument: Tfeddocument
     Top = 129
     Width = 147
     Align = alRight
+    Enabled = False
     TabOrder = 5
+    Visible = False
     ReadOnly = True
     StyleController = scStyle
     Lines.Strings = (

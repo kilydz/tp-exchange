@@ -3,22 +3,24 @@ inherited fdocrec_dr1: Tfdocrec_dr1
   Top = 132
   Caption = #1047#1072#1087#1080#1089' '#1074' '#1076#1086#1082#1091#1084#1077#1085#1090#1110
   ClientHeight = 320
-  ClientWidth = 553
+  ClientWidth = 609
   OldCreateOrder = True
-  ExplicitWidth = 561
-  ExplicitHeight = 354
+  ExplicitWidth = 617
+  ExplicitHeight = 347
   PixelsPerInch = 96
   TextHeight = 13
   inherited master: ZMaster
+    Width = 401
     Height = 289
+    ExplicitWidth = 401
     ExplicitHeight = 289
   end
   inherited p_stage0: TPanel
     Left = 200
-    Width = 345
+    Width = 393
     Height = 193
     ExplicitLeft = 200
-    ExplicitWidth = 345
+    ExplicitWidth = 393
     ExplicitHeight = 193
     inherited Label1: TLabel
       Top = 49
@@ -28,18 +30,18 @@ inherited fdocrec_dr1: Tfdocrec_dr1
       ExplicitWidth = 46
     end
     object Label2: TLabel [1]
-      Left = 215
-      Top = 90
-      Width = 15
+      Left = 227
+      Top = 103
+      Width = 22
       Height = 13
-      Caption = #1062#1047
+      Caption = #1062#1110#1085#1072
     end
     object Label4: TLabel [2]
-      Left = 215
-      Top = 122
-      Width = 14
+      Left = 227
+      Top = 130
+      Width = 26
       Height = 13
-      Caption = #1057#1047
+      Caption = #1057#1091#1084#1072
     end
     object Label3: TLabel [3]
       Left = 8
@@ -67,7 +69,7 @@ inherited fdocrec_dr1: Tfdocrec_dr1
     end
     inherited ed_goods_list: TStringGrid
       Top = 160
-      Width = 343
+      Width = 391
       Height = 32
       Enabled = False
       TabOrder = 7
@@ -76,7 +78,7 @@ inherited fdocrec_dr1: Tfdocrec_dr1
       OnKeyPress = EditsKeyPress
       OnKeyUp = EditsKeyUp
       ExplicitTop = 160
-      ExplicitWidth = 343
+      ExplicitWidth = 391
       ExplicitHeight = 32
     end
     inherited ed_kilk: TdxCalcEdit
@@ -90,18 +92,22 @@ inherited fdocrec_dr1: Tfdocrec_dr1
       ExplicitWidth = 121
     end
     inherited ed_price: TdxCalcEdit
-      Left = 247
-      Top = 82
+      Left = 259
+      Top = 95
+      Width = 122
       TabOrder = 4
-      ExplicitLeft = 247
-      ExplicitTop = 82
+      ExplicitLeft = 259
+      ExplicitTop = 95
+      ExplicitWidth = 122
     end
     inherited ed_sum: TdxCalcEdit
-      Left = 247
-      Top = 109
+      Left = 259
+      Top = 122
+      Width = 122
       TabOrder = 5
-      ExplicitLeft = 247
-      ExplicitTop = 109
+      ExplicitLeft = 259
+      ExplicitTop = 122
+      ExplicitWidth = 122
     end
     inherited ed_price_pdv: TdxCalcEdit
       Left = 88
@@ -122,8 +128,8 @@ inherited fdocrec_dr1: Tfdocrec_dr1
       ExplicitWidth = 121
     end
     inherited ed_name: TdxEdit
-      Width = 249
-      ExplicitWidth = 249
+      Width = 289
+      ExplicitWidth = 289
       StoredValues = 2
     end
     inherited ed_code_unit: TdxLookupEdit
