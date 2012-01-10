@@ -46,7 +46,7 @@ XLibraDIGI_SM::XLibraDIGI_SM(const char *iprog_way,
 	sprintf(tovar_name, way_format, iprog_way, "tovar.dat");
 	sprintf(label_name, way_format, iprog_way, "label.dat");
 
-	code_page = 0;
+	code_page = 1;
 	std::sprintf(log_name, way_format, iprog_way, "XLibraDIGI_SM.log");
 }
 
@@ -149,7 +149,7 @@ void XLibraDIGI_SM::StrFormat(BYTE *buf, char *name)
 			sprintf(lp_buf, "0D%s%02X", font_sz, len1);
 			lp_buf += 6;
 		}
-		BYTE chr = *lp_name; //ConvertChar();
+		BYTE chr = ConvertChar(*lp_name);
 		sprintf(lp_buf, "%02X", chr);
 		lp_buf += 2;
 		++lp_name;
@@ -161,13 +161,13 @@ void XLibraDIGI_SM::StrFormat(BYTE *buf, char *name)
 
 int XLibraDIGI_SM::ProgrammingTovar(XLibraTovar tovar)
 {
-	long nomen_num = tovar.nomen_num -
-		((XEithernetConnection *)connection_descriptor)->prefix * 10000;
+	long nomen_num = tovar.nomen_num; //-
+	   //	((XEithernetConnection *)connection_descriptor)->prefix * 10000;
 	long nomen_num_int = nomen_num;
 
-	if (nomen_num > 9999)
+	if (tovar.art_num > 9999)
 	{
-		sprintf(result.text, "Для %d код товару %d перевищує 9999", tovar.nomen_num, nomen_num);
+		sprintf(result.text, "Для %d код артиулу %d перевищує 9999", tovar.nomen_num, tovar.art_num);
 		SaveToLog(result.text);
 		result.critical = 0;
 		return LIBRA_ERROR_PARAM;
@@ -177,7 +177,7 @@ int XLibraDIGI_SM::ProgrammingTovar(XLibraTovar tovar)
 
 	BYTE buf[1024];
 	int len(0);
-	sprintf(buf, "%08d", nomen_num);
+	sprintf(buf, "%08d", tovar.art_num);
 	memcpy(_recPLU.nPLU, buf, 8);   len+=8;
 
 	//BYTE nSize[2];     //  HEX      len+=2;
@@ -188,9 +188,9 @@ int XLibraDIGI_SM::ProgrammingTovar(XLibraTovar tovar)
 	sprintf(buf, "%08d", price);
 	memcpy(_recPLU.nPrice100, buf, 8);	len+=8;	// 4 Ціна в копійках
 	memcpy(_recPLU.nFet1, "11", 2); len+=2; // HEX № формату 1-ї етикетки  11
-	memcpy(_recPLU.nFbCode, "09", 2); len+=2; // HEX № формату штрихкоду 09
-	sprintf(buf, "%02d%04d00000000", ((XEithernetConnection *)connection_descriptor)->prefix,
-						   nomen_num);
+	memcpy(_recPLU.nFbCode, "04", 2); len+=2; // HEX № формату штрихкоду 09
+	sprintf(buf, "%02d%06d000000", ((XEithernetConnection *)connection_descriptor)->prefix,
+						   tovar.nomen_num);
 	memcpy(_recPLU.nBCode, buf, 14); len+=14; // BCD Дані штрихкоду  22|28 + IntToBCD(nomen_No, 2) + '00000000'
 	sprintf(buf, "%04d", tovar.termin);
 	memcpy(_recPLU.nTerminDSell, buf, 4);  len+=4; // BCD 0+Строк продажу в днях

@@ -33,6 +33,7 @@ object fscales: Tfscales
       BevelOuter = bvRaised
       BevelKind = bkFlat
       TabOrder = 1
+      Visible = False
       object p_main_tool_bar: ZToolBar
         Left = 11
         Top = 2
@@ -146,6 +147,8 @@ object fscales: Tfscales
       PreviewFont.Height = -11
       PreviewFont.Name = 'Tahoma'
       PreviewFont.Style = []
+      ExplicitLeft = 2
+      ExplicitTop = 26
       object g_dicscale_id: TdxDBGridMaskColumn
         DisableEditor = True
         ReadOnly = True
@@ -199,21 +202,18 @@ object fscales: Tfscales
         FieldName = 'scale_type_id'
         ShowDescription = True
       end
+      object g_dicip: TdxDBGridMaskColumn
+        Caption = 'IP-'#1072#1076#1088#1077#1089#1072
+        BandIndex = 0
+        RowIndex = 0
+        FieldName = 'ip'
+      end
       object g_dicis_sync: TdxDBGridCheckColumn
         Caption = #1063#1080' '#1089#1080#1093#1088#1086#1085#1110#1079#1091#1074#1072#1090#1080
         Width = 67
         BandIndex = 0
         RowIndex = 0
         FieldName = 'is_sync'
-        ValueChecked = 'True'
-        ValueUnchecked = 'False'
-      end
-      object g_dicwith_zero_rest: TdxDBGridCheckColumn
-        Caption = #1047' '#1085#1091#1083#1100#1086#1074#1080#1084' '#1079#1072#1083#1080#1096#1082#1086#1084
-        Width = 63
-        BandIndex = 0
-        RowIndex = 0
-        FieldName = 'with_zero_rest'
         ValueChecked = 'True'
         ValueUnchecked = 'False'
       end
@@ -985,6 +985,10 @@ object fscales: Tfscales
     end
     object mem_dicwith_zero_rest: TBooleanField
       FieldName = 'with_zero_rest'
+    end
+    object mem_dicip: TStringField
+      FieldName = 'ip'
+      Size = 24
     end
   end
   object ds_dic: TDataSource

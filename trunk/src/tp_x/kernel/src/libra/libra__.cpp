@@ -108,15 +108,7 @@ static unsigned char table[4][256] =
 int _stdcall LibraConnect(HANDLE im_hWnd, void **handle, const char *prog_way, XLibraType ilibra_type, XLibraCallBack icall_finc,
 									 const XLibraConnectionString *iconnection_strings)
 {
-	if (ilibra_type == LIBRA_LT_LP)
-		(*handle) = new XLibraLP(icall_finc, iconnection_strings);
-	else if (ilibra_type == LIBRA_LT_MASSA_K_VP)
-		(*handle) = new XLibraMassaK_VP(icall_finc, iconnection_strings);
-	else if (ilibra_type == LIBRA_LT_MASSA_K_VPM)
-		(*handle) = new XLibraMassaK_VPM(im_hWnd, prog_way, icall_finc, iconnection_strings);
-	else if (ilibra_type == LIBRA_LT_TIGER_D)
-		(*handle) = new XLibraTigerD(prog_way, icall_finc, iconnection_strings);
-	else if (ilibra_type == LIBRA_LT_DIGI_SM)
+	if (ilibra_type == LIBRA_LT_DIGI_SM)
 		(*handle) = new XLibraDIGI_SM(prog_way, icall_finc, iconnection_strings);
 
 
@@ -133,9 +125,9 @@ int _stdcall LibraTovarClear(void **handle)
 	return ((XLibra *)(*handle))->LibraTovarClear();
 }
 
-int _stdcall LibraTovarAdd(void **handle, int nomen_num, char *name, double price, char *date, int termin)
+int _stdcall LibraTovarAdd(void **handle, int nomen_num, char *name, double price, char *date, int termin, int art_num)
 {
-	return ((XLibra *)(*handle))->LibraTovarAdd(nomen_num, name, price, date, termin);
+	return ((XLibra *)(*handle))->LibraTovarAdd(nomen_num, name, price, date, termin, art_num);
 }
 
 int _stdcall LibraProgrammingAllTovar(void **handle)
@@ -206,13 +198,14 @@ XLibraTovar::XLibraTovar()
 	std::strcpy(date, "01.01.2012");
 }
 
-XLibraTovar::XLibraTovar(int inomen_num, char *iname, double iprice, char *idate, int itermin)
+XLibraTovar::XLibraTovar(int inomen_num, char *iname, double iprice, char *idate, int itermin, int iart_num)
 {
 	nomen_num = inomen_num;
 	strncpy(name, iname, 128);
 	price = iprice;
 	strncpy(date, idate, 16);
-    termin = itermin;
+	termin = itermin;
+	art_num = iart_num;
 }
 
 XLibraTovar::~XLibraTovar()
@@ -424,9 +417,9 @@ XLibraResult* XLibra::GetResult()
 	return 0;
 }
 
-int XLibra::LibraTovarAdd(int nomen_num, char *name, double price, char *date, int termin)
+int XLibra::LibraTovarAdd(int nomen_num, char *name, double price, char *date, int termin, int art_num)
 {
-	l_tovar.push_back(XLibraTovar(nomen_num, name, price, date, termin));
+	l_tovar.push_back(XLibraTovar(nomen_num, name, price, date, termin, art_num));
 	return 0;
 }
 
