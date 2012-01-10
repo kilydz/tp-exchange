@@ -14,9 +14,7 @@ uses
   SysUtils,
   Classes,
   uscales in 'uscales.pas' {fscales},
-  uscale in 'uscale.pas' {fscale},
   etalon_dlg in '..\..\lib\etalons\etalon_dlg.pas' {fetalon_dlg},
-  uscale_params in 'uscale_params.pas' {Form2},
   usync_log in 'usync_log.pas' {fsync_log};
 
 {$R *.res}

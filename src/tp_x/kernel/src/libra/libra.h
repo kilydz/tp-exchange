@@ -32,10 +32,6 @@ enum XError
 enum XLibraType
 {
 	LIBRA_LT_NONE   		= 0,
-	LIBRA_LT_LP		 		= 1,
-	LIBRA_LT_MASSA_K_VPM	= 2,
-	LIBRA_LT_MASSA_K_VP		= 3,
-	LIBRA_LT_TIGER_D		= 4,
 	LIBRA_LT_DIGI_SM 		= 5
 };
 
@@ -43,13 +39,14 @@ class __declspec(dllexport) XLibraTovar
 {
 public:
 	int nomen_num;
+	int art_num;
 	char name[128];
 	double price;
 	char date[16];
 	int termin;
 
 	XLibraTovar();
-	XLibraTovar(int inomen_num, char *iname, double iprice, char *idate, int itermin);
+	XLibraTovar(int inomen_num, char *iname, double iprice, char *idate, int itermin, int art_num);
 	~XLibraTovar();
 };
 
@@ -144,7 +141,7 @@ public:
     virtual int Disconnect();
 
 	int LibraTovarClear();
-	int LibraTovarAdd(int nomen_num, char *name, double price, char *date, int termin);
+	int LibraTovarAdd(int nomen_num, char *name, double price, char *date, int termin, int art_num);
 
    //	virtual
 	virtual int ProgrammingAllTovar();
@@ -155,114 +152,6 @@ public:
 	char *StrToSpaseStr(const char *inp_str, char *buf, int len);
 	char *IntToSpaseStr(const int i_val, char *buf, int len);
 	char *DoubleToSpaseStr(const double d_val, char *buf, int len);
-};
-
-struct XLibraLPRet {
-
-    XError error;
-};
-
-class __declspec(dllexport) XLibraLP : public XLibra
-{
-protected:
-	DCB old_options;
-
-    unsigned char seq;
-    XLibraLPRet ret;
-
-    unsigned char last_cmd[512];
-
-    void ReadAns();
-    int Listen();
-public:
-	XLibraLP(XLibraCallBack icall_finc,
-			 const XLibraConnectionString *iconnection_strings);
-    ~XLibraLP();
-
-	int DoCmd(unsigned char cmd, char *params);
-    XLibraResult* GetResult();
-
-    int Connect();
-    int Disconnect();
-
-    int SendLibraNum();
-
-	int ProgrammingTovar(XLibraTovar tovar);
-    int ClearTovar(int nomen_num);
-    int SWAdaptor();
-};
-
-struct XLibraMassaKRet {
-
-	XError error;
-};
-
-class __declspec(dllexport) XLibraMassaK_VP : public XLibra
-{
-protected:
-	DCB old_options;
-
-	unsigned char seq;
-	XLibraMassaKRet ret;
-
-	unsigned char last_cmd[512];
-
-	void ReadAns();
-	int Listen();
-	int IsReady();
-	void set9bit(bool bit);
-public:
-	XLibraMassaK_VP(XLibraCallBack icall_finc,
-			 const XLibraConnectionString *iconnection_strings);
-	~XLibraMassaK_VP();
-
-	XLibraResult* GetResult();
-
-	int Connect();
-	int Disconnect();
-
-	int SendLibraNum();
-
-	int ProgrammingTovar(XLibraTovar tovar);
-	int ClearTovar(int nomen_num);
-	int SWAdaptor();
-};
-
-class __declspec(dllexport) XLibraMassaK_VPM : public XLibra
-{
-protected:
-	DCB old_options;
-
-	unsigned char seq;
-	XLibraMassaKRet ret;
-
-	unsigned char last_cmd[512];
-
-	void ReadAns();
-	int Listen();
-	int IsReady();
-
-	HINSTANCE h_dll;
-	HANDLE h_device;
-	HANDLE m_hWnd;
-	
-	char prog_way[512];
-public:
-	XLibraMassaK_VPM(HANDLE im_hWnd, const char *iprog_way, XLibraCallBack icall_finc,
-			 const XLibraConnectionString *iconnection_strings);
-	~XLibraMassaK_VPM();
-
-	XLibraResult* GetResult();
-
-	int Connect();
-	int Disconnect();
-
-	int SendLibraNum();
-
-	int ProgrammingTovar(XLibraTovar tovar);
-	int ProgrammingAllTovar();
-	int ClearTovar(int nomen_num);
-	int SWAdaptor();
 };
 
 struct XLibraDIGIRet {
@@ -276,7 +165,7 @@ protected:
 	DCB old_options;
 
 	unsigned char seq;
-	XLibraMassaKRet ret;
+	XLibraDIGIRet ret;
 
 	unsigned char last_cmd[512];
 
@@ -309,59 +198,12 @@ public:
 	int SWAdaptor();
 };
 
-struct XLibraTigerRet {
-
-	XError error;
-};
-
-class __declspec(dllexport) XLibraTigerD : public XLibra
-{
-protected:
-	DCB old_options;
-
-	unsigned char seq;
-	XLibraTigerRet ret;
-
-	unsigned char last_cmd[512];
-
-	void ReadAns();
-	int Listen();
-	int IsReady();
-
-	HINSTANCE h_dll;
-	HANDLE h_device;
-	char dll_way[512];
-	char SCALEADDRESS_way[512];
-	char transscale_way[512];
-	char plu_txt_way[512];
-
-	char back_dir[512];
-	char dll_dir[512];
-public:
-	XLibraTigerD(const char *iprog_way, XLibraCallBack icall_finc,
-			 const XLibraConnectionString *iconnection_strings);
-	~XLibraTigerD();
-
-	XLibraResult* GetResult();
-
-	int Connect();
-	int Disconnect();
-
-	int SendLibraNum();
-
-	int ProgrammingTovar(XLibraTovar tovar);
-	int ProgrammingAllTovar();
-	int ClearTovar(int nomen_num);
-	int SWAdaptor();
-};
-
-
 extern  SOKOLDLL int __stdcall LibraConnect(HANDLE im_hWnd, void **handle, const char *prog_way, XLibraType ilibra_type, XLibraCallBack icall_finc,
 									 const XLibraConnectionString *iconnection_strings);
 extern  SOKOLDLL int __stdcall LibraSWAdaptor(void **handle);
 
 extern  SOKOLDLL int __stdcall LibraTovarClear(void **handle);
-extern	SOKOLDLL int __stdcall LibraTovarAdd(void **handle, int nomen_num, char *name, double price, char *date, int termin);
+extern	SOKOLDLL int __stdcall LibraTovarAdd(void **handle, int nomen_num, char *name, double price, char *date, int termin, int art_num);
 
 extern  SOKOLDLL int __stdcall LibraProgrammingAllTovar(void **handle);
 extern  SOKOLDLL int __stdcall LibraDisconnect(void **handle);

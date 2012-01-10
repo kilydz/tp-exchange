@@ -65,7 +65,7 @@ implementation
 
 function LibraConnect(im_hWnd: HWnd; handle: pointer; prog_way: PChar; itype: integer;
         icall_finc: pointer; iconnection_strings: lpXLibraConnectionString): integer; stdcall; external 'libra.dll';
-function LibraTovarAdd(handle: pointer; nomen_num: integer; name: PChar; price: double; date: PChar; termin: integer): integer; stdcall; external 'libra.dll';
+function LibraTovarAdd(handle: pointer; nomen_num: integer; name: PChar; price: double; date: PChar; termin: integer; art_num: integer): integer; stdcall; external 'libra.dll';
 function LibraProgrammingAllTovar(handle: pointer): integer; stdcall; external 'libra.dll';
 function LibraDisconnect(handle: pointer): integer; stdcall; external 'libra.dll';
 
@@ -123,21 +123,7 @@ begin
     strcopy(conn_lines[0], PAnsiChar('connection=Eithernet'));
   strcopy(conn_lines[1], PChar('number=' + mem_dic.FieldByName('number').AsString));
   strcopy(conn_lines[2], PChar('prefix=' + mem_dic.FieldByName('prefix').AsString));
-
-  if tr_R.InTransaction then tr_R.Commit;
-  tr_R.StartTransaction;
-   q_R.SQL.Text := 'select teg || ''='' || val as prm from t_scale_parameters where scale_id = :iscale_id';
-   q_R.ParamByName('iscale_id').AsInteger := mem_dic.FieldByName('scale_id').AsInteger;
-   q_R.ExecQuery;
-   prm_pos := 3;
-   while not q_R.Eof do
-   begin
-     strcopy(conn_lines[prm_pos], PAnsiChar(q_R.FieldByName('prm').AsString));
-     prm_pos := prm_pos + 1;
-     q_R.Next;
-   end;
-   conn_lines[prm_pos] := '';
-  if tr_R.InTransaction then tr_R.Commit;
+  strcopy(conn_lines[3], PChar('ip=' + mem_dic.FieldByName('ip').AsString));
 
   LibraConnect(self.Handle,
       libra,
@@ -151,14 +137,15 @@ begin
   tr_R.StartTransaction;
    q_R.Close;
    q_R.SQL.Text := 'select onomen_id,  onomen_code, onomen_name, oout_price, ' +
-' odate, otermin from PS_SCALE_NOMENS(:iadd_pure_rest, :ilibra_num)  order by onomen_code';
-   if mem_dic.FieldByName('with_zero_rest').AsBoolean then
-     add_pure_rest := 1
-   else
-     add_pure_rest := 0;
-   libra_num := IntToStr(mem_dic.FieldByName('prefix').AsInteger);
+' odate, otermin, oart_num from PS_SCALE_NOMENS(:iadd_pure_rest, :ilibra_num, :icode_dealer)  order by onomen_code';
+   //if mem_dic.FieldByName('with_zero_rest').AsBoolean then
+     add_pure_rest := 1;
+  // else
+  //   add_pure_rest := 0;
+   libra_num := '25'; //IntToStr(mem_dic.FieldByName('prefix').AsInteger);
 	 q_R.ParamByName('iadd_pure_rest').AsInteger := add_pure_rest; //
 	 q_R.ParamByName('ilibra_num').AsString := libra_num; //
+   q_R.ParamByName('icode_dealer').AsInteger := 0;
    q_R.ExecQuery;
    counter := 0;
    while not q_R.Eof do
@@ -167,7 +154,8 @@ begin
              PChar(q_R.FieldByName('onomen_name').AsString),
              q_R.FieldByName('oout_price').AsDouble,
              PChar(q_R.FieldByName('odate').AsString),
-             q_R.FieldByName('otermin').AsInteger);
+             q_R.FieldByName('otermin').AsInteger,
+             q_R.FieldByName('oart_num').AsInteger);
       q_R.Next;
       counter := counter + 1;
    end;

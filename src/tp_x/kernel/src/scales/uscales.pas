@@ -39,10 +39,11 @@ type
     g_dicprefix: TdxDBGridMaskColumn;
     g_dicis_sync: TdxDBGridCheckColumn;
     mem_dicwith_zero_rest: TBooleanField;
-    g_dicwith_zero_rest: TdxDBGridCheckColumn;
     g_dicscale_type_id: TdxDBGridImageColumn;
     g_dicscale_interface_id: TdxDBGridImageColumn;
     ZButton1: ZButton;
+    mem_dicip: TStringField;
+    g_dicip: TdxDBGridMaskColumn;
     procedure ZButton1Click(Sender: TObject);
     procedure bt_Click(Sender: TObject);
   private
@@ -103,7 +104,7 @@ begin
     if tr_R.InTransaction then tr_R.Commit;
     tr_R.StartTransaction;
      q_R.SQL.Text := 'select scale_id, number, name, prefix, scale_interface_id, ' +
-' scale_type_id from t_scales_v1';
+' scale_type_id, ip from t_scales';
      q_R.ExecQuery;
      mem_dic.Close;
      mem_dic.Open;
@@ -116,6 +117,7 @@ begin
        mem_dicprefix.AsInteger := q_R.FieldByName('prefix').AsInteger;
        mem_dicscale_interface_id.AsInteger := q_R.FieldByName('scale_interface_id').AsInteger;
        mem_dicscale_type_id.AsInteger := q_R.FieldByName('scale_type_id').AsInteger;
+       mem_dicip.AsString := q_R.FieldByName('ip').AsString;
        mem_dicis_sync.AsBoolean := true;
        mem_dicwith_zero_rest.AsBoolean := true;
        mem_dic.Post;
@@ -138,7 +140,7 @@ begin
     if tr_R.InTransaction then tr_R.Commit;
     tr_R.StartTransaction;
      q_R.SQL.Text := 'select scale_id, number, name, prefix, scale_interface_id, ' +
-' scale_type_id from t_scales_v1 where scale_id = :iscale_id';
+' scale_type_id, ip from t_scales where scale_id = :iscale_id';
      q_R.ParamByName('iscale_id').AsInteger := mem_dic.FieldByName('scale_id').AsInteger;
      q_R.ExecQuery;
      mem_dic.Edit;
@@ -148,6 +150,7 @@ begin
      mem_dicprefix.AsInteger := q_R.FieldByName('prefix').AsInteger;
      mem_dicscale_interface_id.AsInteger := q_R.FieldByName('scale_interface_id').AsInteger;
      mem_dicscale_type_id.AsInteger := q_R.FieldByName('scale_type_id').AsInteger;
+     mem_dicip.AsString := q_R.FieldByName('ip').AsString;
      mem_dic.Post;
     if tr_R.InTransaction then tr_R.Commit;
 
@@ -168,7 +171,7 @@ var button: ZToolButton;
     ins_upd_input: ZFuncArgs;
 begin
   button := ZToolButton(Sender);
-
+  {
     // Створення запису
   if button = bt_ins then
   begin
@@ -194,7 +197,7 @@ begin
     begin
       RefreshRecord;
     end;
-  end
+  end   }
 end;
 
 // Перевірка, чи існує запис
