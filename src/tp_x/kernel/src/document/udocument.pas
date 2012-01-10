@@ -198,6 +198,19 @@ begin
      qW.ExecQuery;
    end;
   if (trW.InTransaction) then trW.Commit;
+
+  //EDRPOU
+  if(trR.InTransaction)then trR.Commit;
+  trR.StartTransaction;
+  qR.SQL.Text := 'select first (1) f.name from firms f where f.code_zip = :icode_zip';
+  qR.ParamByName('icode_zip').AsString := resulted.edrpou;
+  qR.ExecQuery;
+  if qR.RecordCount > 0 then
+    resulted.name_firm := qR.FieldByName('name').AsString
+  else
+    resulted.name_firm := '';
+  if (trR.InTransaction) then trR.Commit;
+
 end;
 
 procedure Tfdocument.FormShow(Sender: TObject);

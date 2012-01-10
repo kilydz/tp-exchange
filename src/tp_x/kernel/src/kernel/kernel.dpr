@@ -82,9 +82,33 @@ begin
     ini_files_path:=root_path + WAY_INI;
 end;
 
+procedure InitObject(var a_veles_info: ZVelesInfoRec);
+var
+  libHandle: THandle;
+  ObjectSetLast: function (var prm: ZVelesInfoRec): boolean;
+begin
+  a_veles_info.custom_data.pcode_dealer^ := -1;
+
+  libHandle := LoadLibrary('objects.dll');
+  if libHandle >= 32 then
+  begin
+    @ObjectSetLast := nil;
+    @ObjectSetLast := GetProcAddress(libHandle, 'ObjectSetLast');
+    if (@ObjectSetLast = nil) or
+       (not ObjectSetLast(a_veles_info)) then
+        //ErrorDialog('Жопа', 'дінозавра');
+        HandleError('Не визначено активний магазин');
+    FreeLibrary(libHandle);
+  end;
+end;
+
+
 begin
     Application.Initialize;
     if Application.Handle = 0 then Application.CreateHandle;
+
+    New(veles_info.custom_data.pcode_dealer);
+    veles_info.custom_data.pcode_dealer^ := -1;
 
     start_dll_handle:=0;
     try
@@ -142,7 +166,7 @@ begin
                 fpassword:=Tfpassword.Create(Application);
                 Application.CreateForm(Tfmain, fmain);
 
-  fmain.Caption:=veles_info.app_name;
+                fmain.Caption:=veles_info.app_name;
 
                 try
                     veles_info.base:=Pointer(fmain.Base);
@@ -193,6 +217,7 @@ begin
                                     begin
                                         //якщо нормально підключились показуємо форму та запускаємо програму
                                         Application.MainForm.Visible:=true;
+                                        InitObject(veles_info);
                                         Application.Run;
                                     end
                                     else if start_func_result = RESULT_CANCEL then
@@ -214,6 +239,8 @@ begin
                             else begin
                                 HandleError('Неможливо загрузити динамічну бібліотеку ' + start_dll_name + '. Перевірте наявність усіх компонентів програми. (Project Source програми)');
                             end;
+
+
                         end;//if fmain.Base.Connected then
                     end;//if fpassword.ShowModal then
                 finally
@@ -240,5 +267,6 @@ begin
             FreeLibrary(start_dll_handle);
         end;
     end;
+    dispose(veles_info.custom_data.pcode_dealer);
 end.
 

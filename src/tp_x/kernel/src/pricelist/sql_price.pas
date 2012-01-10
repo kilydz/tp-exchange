@@ -61,6 +61,8 @@ type
     mem_printPRICE_DEALER: TFloatField;
     mem_printDEFAULT_BARCODE: TStringField;
     mem_printID: TIntegerField;
+    btn1: TButton;
+    procedure btn1Click(Sender: TObject);
     procedure mi_popupPopup(Sender: TObject);
     procedure mi_itemsClick(Sender: TObject);
     procedure report_frfUserFunction(const Name: string; p1, p2, p3: Variant;
@@ -250,7 +252,7 @@ begin
        mem_dicoutprice.AsFloat := q_R.FieldByName('ooutprice').AsFloat;
        mem_dicis_in_discount.AsInteger := q_R.FieldByName('ois_in_discount').AsInteger;
        mem_dicprint_it.AsInteger := q_R.FieldByName('oprint_it').AsInteger;
-       mem_diccnt.AsInteger := 1;
+       mem_diccnt.AsInteger := q_R.FieldByName('oprint_cnt').AsInteger;
        mem_dic.Post;
        num := num + 1;
        q_R.Next;
@@ -293,7 +295,7 @@ begin
           'left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer = :icode_dealer)' + #13#10 +
           'where w.code_wares = :icode_wares';
        q_R.ParamByName('icode_wares').AsInteger := mem_dicnomen_id.AsInteger;
-       q_R.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;
+       q_R.ParamByName('icode_dealer').AsInteger := prm.custom_data.pcode_dealer^;
        q_R.ExecQuery;
        cnt := mem_diccnt.AsInteger;
        while cnt > 0 do
@@ -361,6 +363,23 @@ procedure Tfsql_price.BitBtn1Click(Sender: TObject);
 var i :integer;
 begin
 
+end;
+
+procedure Tfsql_price.btn1Click(Sender: TObject);
+begin
+  begin
+    mem_dic.First;
+    while not mem_dic.Eof do
+    begin
+      if mem_diccnt.AsInteger <> 1 then
+      begin
+        mem_dic.Edit;
+        mem_diccnt.AsInteger := 1;
+        mem_dic.Post;
+      end;
+      mem_dic.Next;
+    end
+  end
 end;
 
 procedure Tfsql_price.btnPrintClick(Sender: TObject);

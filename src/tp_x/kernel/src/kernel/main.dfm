@@ -1,7 +1,7 @@
 object fmain: Tfmain
   Left = 318
   Top = 219
-  ClientHeight = 411
+  ClientHeight = 430
   ClientWidth = 794
   Color = clBtnFace
   DefaultMonitor = dmMainForm
@@ -23,7 +23,7 @@ object fmain: Tfmain
   object splitterMain: TSplitter
     Left = 33
     Top = 0
-    Height = 371
+    Height = 390
     Visible = False
     ExplicitLeft = 27
     ExplicitTop = -6
@@ -33,14 +33,15 @@ object fmain: Tfmain
     Left = 36
     Top = 0
     Width = 758
-    Height = 371
+    Height = 390
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitHeight = 371
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 392
+    Top = 411
     Width = 794
     Height = 19
     Panels = <
@@ -53,10 +54,11 @@ object fmain: Tfmain
       item
         Width = 200
       end>
+    ExplicitTop = 392
   end
   object tab_set: TTabSet
     Left = 0
-    Top = 371
+    Top = 390
     Width = 794
     Height = 21
     Align = alBottom
@@ -69,12 +71,13 @@ object fmain: Tfmain
     SoftTop = True
     Style = tsSoftTabs
     OnChange = tab_setChange
+    ExplicitTop = 371
   end
   object SideBar_: TdxSideBar
     Left = 0
     Top = 0
     Width = 33
-    Height = 371
+    Height = 390
     BkGround.BeginColor = clGrayText
     BkGround.EndColor = clGrayText
     BkGround.FillStyle = bfsNone
@@ -100,6 +103,7 @@ object fmain: Tfmain
     StoreInRegistry = False
     OnItemClick = SideBar_ItemClick
     Visible = False
+    ExplicitHeight = 371
   end
   object LargeImagesForSideBar: TImageList
     Height = 48
@@ -156,6 +160,13 @@ object fmain: Tfmain
     object mi_exit: TMenuItem
       Caption = #1047#1072#1082#1088#1080#1090#1080
       OnClick = mi_exitClick
+    end
+    object miMode: TMenuItem
+      Caption = #1056#1077#1078#1080#1084' '#1058#1055
+      object miModeSet: TMenuItem
+        Caption = #1047#1084#1110#1085#1080#1090#1080
+        OnClick = miModeSetClick
+      end
     end
   end
   object trR: TIBTransaction

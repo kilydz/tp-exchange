@@ -20,7 +20,6 @@
       <Projects Name="popup.dll">popup\popup.bdsproj</Projects>
       <Projects Name="popups.dll">popups\popups.bdsproj</Projects>
       <Projects Name="libra_sync.dll">libra\libra_sync.bdsproj</Projects>
-      <Projects Name="libra.dll">libra\libra.bdsproj</Projects>
       <Projects Name="scales.dll">scales\scales.bdsproj</Projects>
       <Projects Name="nomen.dll">nomen\nomen.bdsproj</Projects>
       <Projects Name="users.dll">users\users.bdsproj</Projects>
@@ -35,7 +34,7 @@
       <Projects Name="base_config.exe">base_config\base_config.bdsproj</Projects>
       <Projects Name="start.dll">start\start.bdsproj</Projects>
       <Projects Name="freedom.bpl">..\Zcomp\freedom.bdsproj</Projects>
-      <Projects Name="Targets">pricelist.dll objects.dll kernel.exe zutils.dll document.dll documents.dll nomens.dll tree.dll popup.dll popups.dll libra_sync.dll libra.dll scales.dll nomen.dll users.dll xreports.dll services.dll invoice.dll groups.dll group.dll user.dll about.dll veles_conf.exe base_config.exe start.dll freedom.bpl</Projects>
+      <Projects Name="Targets">pricelist.dll objects.dll kernel.exe zutils.dll document.dll documents.dll nomens.dll tree.dll popup.dll popups.dll libra_sync.dll scales.dll nomen.dll users.dll xreports.dll services.dll invoice.dll groups.dll group.dll user.dll about.dll veles_conf.exe base_config.exe start.dll freedom.bpl</Projects>
     </Projects>
     <Dependencies/>
   </Default.Personality>

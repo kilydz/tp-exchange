@@ -13,6 +13,7 @@ type
      doc_date:      string;
      doc_num:       string;
      edrpou:        string;
+     name_firm:     string;
    end;
   lpZDocumentDialogResulted = ^ZDocumentDialogResulted;
 

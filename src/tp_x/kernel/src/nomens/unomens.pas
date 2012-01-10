@@ -207,7 +207,8 @@ begin
 //  q_dic.ParamByName('iflag').AsInteger := StrToInt(ed_flag.Text);
   if q_dic.Params.FindParam('icode_group_wares') <> nil then
     q_dic.ParamByName('icode_group_wares').AsInteger := grp_id;
-  q_dic.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;
+//  q_dic.ParamByName('icode_dealer').AsInteger := prm.custom_data.code_dealer;
+  q_dic.ParamByName('icode_dealer').AsInteger := prm.custom_data.pcode_dealer^;
   inherited RefreshDic;
 end;
 
@@ -390,8 +391,8 @@ begin
 //          ' n.is_in_discount as ois_in_discount, 1 as oprint_it from t_nomens n ';
         price_sql := 'select w.code_wares as onomen_id, w.code_wares as onomen_code, ' +
           ' w.NAME_WARES_RECEIPT as onomen_name, pd.price_dealer as ooutprice, '+
-          ' 0 ois_in_discount, 1 as oprint_it from wares w '+
-          ' left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer = '+IntToStr(prm.custom_data.code_dealer)+')';
+          ' 0 ois_in_discount, 1 as oprint_it, 1 as oprint_cnt from wares w '+
+          ' left join price_dealer pd on (pd.code_wares = w.code_wares and pd.code_dealer = '+IntToStr(prm.custom_data.pcode_dealer^)+')';
         if id_list.GenerateSpaceList = '  ' then
           lpPricesBySQL(price_sql + ' where w.code_wares = '+q_dic.FieldByName('code_wares').AsString, prm)
         else

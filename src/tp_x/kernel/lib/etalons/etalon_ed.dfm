@@ -182,8 +182,6 @@ object fetalon_ed: Tfetalon_ed
     OptionsBehavior = [edgoAutoSort, edgoDragScroll, edgoEnterShowEditor, edgoImmediateEditor, edgoTabThrough, edgoVertThrough]
     OptionsDB = [edgoCancelOnExit, edgoCanDelete, edgoCanInsert, edgoCanNavigation, edgoConfirmDelete, edgoLoadAllRecords, edgoUseBookmarks]
     OptionsView = [edgoBandHeaderWidth, edgoInvertSelect, edgoUseBitmap]
-    ExplicitLeft = -1
-    ExplicitTop = 127
   end
   object p_choicer: TPanel
     Left = 0

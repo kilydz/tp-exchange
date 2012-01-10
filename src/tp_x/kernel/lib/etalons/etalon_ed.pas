@@ -282,8 +282,11 @@ end;
 procedure Tfetalon_ed.FormShow(Sender: TObject);
 begin
   g_dic.LoadFromIniFile(prm.root_way + WAY_INI + ClassName + '.ini');
-  bt_fetch.Down := false;
-  g_dic.OptionsDB := g_dic.OptionsDB - [edgoLoadAllRecords];
+  bt_fetch.Down := true;
+  bt_fetch.Visible := False;
+  bt_fetch.Enabled := False;
+  g_dic.OptionsDB := g_dic.OptionsDB + [edgoLoadAllRecords];
+  g_dic.ShowSummaryFooter := True;
 
   if sql_block_document <> '' then
     try
@@ -305,6 +308,7 @@ begin
     Tfnomenlist(nomen_list_descr.forma).g_dic.SetFocus
   else
     g_dic.SetFocus;
+  //g_dic.OptionsDB := g_dic.OptionsDB + [edgoLoadAllRecords];
 end;
 
 procedure Tfetalon_ed.FormClose(Sender: TObject; var Action: TCloseAction);
