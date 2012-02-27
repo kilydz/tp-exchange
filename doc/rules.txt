@@ -8,8 +8,8 @@ T_MODES - id MODE_ID
 id 1С-а матимуть назви 1C_ID
 timestamps - DML_DATETIME
 id фронтов - ID_WORKPLACE
-IS_ACTIVE - smallint - чи є запис активним (при видаленнях) default = 1
-
+IS_ACTIVE - smallint - чи є запис активним default = 1
+IS_DELETED - smallint - чи є запис видаленим default = 0
 
 процедури:
 PTP_ - процедури інтерфейсу
